@@ -1,22 +1,20 @@
-import './CaixaLogin.css';
+import './CaixaCadastro.css';
 import { IonInput } from '@ionic/react';
 import { IonButton } from '@ionic/react';
 
 interface ContainerProps { }
 
-const CaixaLogin: React.FC<ContainerProps> = () => {
+const CaixaCadastro: React.FC<ContainerProps> = () => {
   return (
     <div className="container">
 
-      <div className='box'>
+      <div className='content'>
         <div className='logo'>
           <img src="./public/todo.png" alt="logo"  />
-          <h1>BEM-VINDO</h1>
-          <h2>Mantenha suas tarefas em dia com ToDolist!</h2>
         </div>  
       </div>
 
-      <div className='content'>
+      <div className='box'>
         <div className='forms'>
           <h1>LOGIN</h1>
           <IonInput label="Email" labelPlacement="floating" fill="outline" placeholder="Email" color="medium"  required type='email'></IonInput>
@@ -25,9 +23,8 @@ const CaixaLogin: React.FC<ContainerProps> = () => {
           <br />
           <IonButton expand="full" fill="solid" color="success">Enviar</IonButton>
            <br />
-          
           <a href="#">Esqueceu a senha?</a>
-          <p>Não tem uma conta? <a href="../pages/Cadastro">Cadastre-se</a></p>
+          <p>Não tem uma conta? <a href='#'>Cadastre-se</a></p>
 
         </div>
       </div>
@@ -35,4 +32,4 @@ const CaixaLogin: React.FC<ContainerProps> = () => {
   );
 };
 
-export default CaixaLogin;
+export default CaixaCadastro;

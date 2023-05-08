@@ -1,8 +1,9 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonPage} from '@ionic/react';
 import CaixaLogin from '../components/CaixaLogin';
-import './Home.css';
+import './Login.css';
 
-const Home: React.FC = () => {
+
+const Login: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -12,4 +13,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Login;
