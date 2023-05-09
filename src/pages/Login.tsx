@@ -13,7 +13,7 @@ const Login: React.FC = () => {
 
           <div className='box'>
             <div className='logo'>
-              <img src="./public/todo.png" alt="logo"  />
+              <img src="/todo.png" alt="logo"  />
               <h1>BEM-VINDO</h1>
               <h2>Mantenha suas tarefas em dia com ToDolist!</h2>
             </div>  
