@@ -8,7 +8,7 @@ No momento, não tem relação entre o front e backend, porem para rodar ambos:
 ```bash
 cd front
 npm install # só necessario uma vez
-npm run start
+npm run dev
 ```
 
 ## Backend
