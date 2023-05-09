@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Amarante&display=swap');
+
+.container {
+  min-height: 100%;
+  display: flex;
+  justify-content: row;
+  align-items: center;
+  font-family: 'Amarante', cursive;
+}
+
+.container .box {
+  width: 55%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #9C93B5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .box .logo img {
+  width: 275px;
+}
+
+.container .box .logo {
+  text-align: center;
+  color: #ffff;
+}
+
+.container .box .logo h1 {
+  font-size: 40px;
+}
+
+.container .content {
+  width: 50%;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .content h1 {
+  color: #9C93B5;
+  font-size: 40px;
+  font-weight:700;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+
+.container .content .forms {
+  width: 55%;
+}
+
+.container .content .forms a {
+  color: #3307d1;
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+  .container .box {
+    visibility: hidden;
+  }
+  .container .content {
+    width: 100%;
+  }
+}
+
