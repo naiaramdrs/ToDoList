@@ -1,7 +1,7 @@
 import {IonContent, IonPage} from '@ionic/react';
-import './Cadastro.css';
 import Botao from '../components/Botao';
 import Input from '../components/Input';
+import './Cadastro.css';
 
 const Cadastro: React.FC = () => {
   return (
