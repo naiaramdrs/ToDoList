@@ -1,7 +1,7 @@
 import { IonContent, IonPage} from '@ionic/react';
-import { IonInput } from '@ionic/react';
-import { IonButton } from '@ionic/react';
 import './Cadastro.css';
+import Botao from '../components/Botao';
+import Input from '../components/Input';
 
 const Cadastro: React.FC = () => {
   return (
@@ -11,25 +11,23 @@ const Cadastro: React.FC = () => {
 
         <div className='box'>
           <div className='logo'>
-            <img src="./public/todo.png" alt="logo"  />
+            <img src="./public/todook.png" alt="logo"  />
             <h1>BEM-VINDO</h1>
-            <h2>Mantenha suas tarefas em dia com ToDolist!</h2>
+            <h2>Seja organizado, mantenha suas tarefas em dia</h2>
           </div>  
         </div>
 
         <div className='content'>
           <div className='forms'>
             <h1>CADASTRE-SE</h1>
-            <IonInput label="Nome" labelPlacement="floating" fill="outline" color="medium"  required type='text'></IonInput>
+            <Input label="Nome" labelPlacement="floating" fill="outline" color="medium" type='text'/>
+            <Input label="Sobrenome" labelPlacement="floating" fill="outline" color="medium" type='text'/>
+            <Input label="Email" labelPlacement="floating" fill="outline" color="medium" type='email'/>
+            <Input label="Senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
+            <Input label="Confirme sua senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
+            <Botao expand="full" fill="solid" color="success">Entrar</Botao>
             <br />
-            <IonInput label="Sobrenome" labelPlacement="floating" fill="outline" color="medium"  required type='text'></IonInput>
-            <br />
-            <IonInput label="Email" labelPlacement="floating" fill="outline" color="medium"  required type='email'></IonInput>
-            <br />
-            <IonInput label="Senha" labelPlacement="floating" fill="outline" color="medium" type='password' required></IonInput>
-            <br />
-            <IonButton expand="full" fill="solid" color="success">Entrar</IonButton>
-            <br />
+            <a href="/">Voltar</a>
 
           </div>
         </div>

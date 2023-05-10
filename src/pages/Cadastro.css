@@ -3,13 +3,13 @@
 .container {
   min-height: 100%;
   display: flex;
-  justify-content: row;
+  justify-content: center;
   align-items: center;
   font-family: 'Amarante', cursive;
 }
 
 .container .box {
-  width: 55%;
+  width: 50%;
   min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
@@ -30,11 +30,11 @@
 }
 
 .container .box .logo h1 {
-  font-size: 40px;
+  font-size: 35px;
 }
 
 .container .content {
-  width: 50%;
+  width: 55%;
   min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
@@ -46,7 +46,7 @@
 
 .container .content h1 {
   color: #9C93B5;
-  font-size: 40px;
+  font-size: 35px;
   font-weight:700;
   text-align: center;
   margin-bottom: 30px;

@@ -1,8 +1,7 @@
 import { IonContent, IonPage} from '@ionic/react';
-import { IonInput } from '@ionic/react';
-import { IonButton } from '@ionic/react';
-import CaixaLogin from '../components/CaixaLogin';
 import './Login.css';
+import Botao from '../components/Botao';
+import Input from '../components/Input';
 
 
 const Login: React.FC = () => {
@@ -13,7 +12,7 @@ const Login: React.FC = () => {
 
           <div className='box'>
             <div className='logo'>
-              <img src="./public/todo.png" alt="logo"  />
+              <img src="./public/todook.png" alt="logo"  />
               <h1>BEM-VINDO</h1>
               <h2>Mantenha suas tarefas em dia com ToDolist!</h2>
             </div>  
@@ -22,16 +21,12 @@ const Login: React.FC = () => {
           <div className='content'>
             <div className='forms'>
               <h1>LOGIN</h1>
-              <IonInput label="Email" labelPlacement="floating" fill="outline" placeholder="Email" color="medium"  required type='email'></IonInput>
-              <br />
-              <IonInput label="Senha" labelPlacement="floating" fill="outline" placeholder="Senha" color="medium" type='password' required></IonInput>
-              <br />
-              <IonButton expand="full" fill="solid" color="success">Enviar</IonButton>
-              <br />
-              
-              <a href="#">Esqueceu a senha?</a>
+              <Input  label="Email" labelPlacement="floating" fill="outline" color="medium" type='email'/>
+              <Input label="Senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
+              <Botao expand="full" fill="solid" color="success"> Entrar</Botao>
+            
               <p>Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
-
+            
             </div>
           </div>
         </div>
