@@ -12,7 +12,7 @@ const Cadastro: React.FC = () => {
 
         <div className='box'>
           <div className='logo'>
-            <img src="./public/todook.png" alt="logo"  />
+            <img src="/todook.png" alt="logo"  />
             <h2>Antes do ToDolist, minhas listas de tarefa estavam espalhadas por todos os lugares! Agora tudo está organizado em um só lugar. – Naiara M.</h2>
           </div>  
         </div>
