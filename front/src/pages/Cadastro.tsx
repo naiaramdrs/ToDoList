@@ -3,8 +3,13 @@ import Botao from '../components/Botao';
 import Input from '../components/Input';
 import MensagemInvalida from '../components/MensagemInvalida';
 import './Cadastro.css';
+import Config from '../config';
 
 const Cadastro: React.FC = () => {
+  const submit = () => {
+    console.log(Config.API_URL);
+  };
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -30,7 +35,7 @@ const Cadastro: React.FC = () => {
             <MensagemInvalida />
             <Input label="Confirme sua senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
             <MensagemInvalida />
-            <Botao expand="full" fill="solid" color="success">Entrar</Botao>
+            <Botao expand="full" fill="solid" color="success" onClick={submit}>Entrar</Botao>
             <p>Já tem cadastro? volte para <a href="/">login</a></p>
 
           </div>
