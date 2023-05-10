@@ -1,4 +1,4 @@
-import { IonContent, IonPage} from '@ionic/react';
+import {IonContent, IonPage} from '@ionic/react';
 import './Cadastro.css';
 import Botao from '../components/Botao';
 import Input from '../components/Input';
