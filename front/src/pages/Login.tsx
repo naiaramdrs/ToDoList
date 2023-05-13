@@ -4,6 +4,7 @@ import Botao from '../components/Botao';
 import Input from '../components/Input';
 import MensagemInvalida from '../components/MensagemInvalida';
 import { validaEmail, validaSenha } from "../util/Validacao";
+import Cabecalho from '../components/Cabecalho';
 import './Login.css';
 
 
@@ -41,6 +42,7 @@ const Login: React.FC = () => {
   
   return (
     <IonPage>
+      <Cabecalho title = "ToDolist"/>
       <IonContent fullscreen>
         <div className="container">
 

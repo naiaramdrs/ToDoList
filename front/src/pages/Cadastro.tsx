@@ -2,11 +2,13 @@ import {IonContent, IonPage} from '@ionic/react';
 import Botao from '../components/Botao';
 import Input from '../components/Input';
 import MensagemInvalida from '../components/MensagemInvalida';
+import Cabecalho from '../components/Cabecalho';
 import './Cadastro.css';
 
 const Cadastro: React.FC = () => {
   return (
     <IonPage>
+      <Cabecalho title = "ToDolist"/>
       <IonContent fullscreen>
       <div className="container">
 
