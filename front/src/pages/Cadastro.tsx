@@ -4,8 +4,13 @@ import Input from '../components/Input';
 import MensagemInvalida from '../components/MensagemInvalida';
 import Cabecalho from '../components/Cabecalho';
 import './Cadastro.css';
+import Config from '../config';
 
 const Cadastro: React.FC = () => {
+  const submit = () => {
+    console.log(Config.API_URL);
+  };
+
   return (
     <IonPage>
       <Cabecalho title = "ToDolist"/>
@@ -14,7 +19,7 @@ const Cadastro: React.FC = () => {
 
         <div className='box'>
           <div className='logo'>
-            <img src="./public/todook.png" alt="logo"  />
+            <img src="/todook.png" alt="logo"  />
             <h2>Antes do ToDolist, minhas listas de tarefa estavam espalhadas por todos os lugares! Agora tudo está organizado em um só lugar. – Naiara M.</h2>
           </div>  
         </div>
@@ -32,7 +37,7 @@ const Cadastro: React.FC = () => {
             <MensagemInvalida />
             <Input label="Confirme sua senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
             <MensagemInvalida />
-            <Botao expand="full" fill="solid" color="success">Entrar</Botao>
+            <Botao expand="full" fill="solid" color="success" onClick={submit}>Entrar</Botao>
             <p>Já tem cadastro? volte para <a href="/">login</a></p>
 
           </div>
