@@ -21,7 +21,7 @@ export const validaNome = (name: any) => {
   
     if (password.length < 6)
       saida = "Sua senha deve ter pelo menos 6 caracteres";
-    else if (password.length > 10)
+    else if (password.length > 15)
       saida = "Sua senha deve ter no máximo 15 caracteres";
   
     return saida;
