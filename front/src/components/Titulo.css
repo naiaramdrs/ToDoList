@@ -1,0 +1,24 @@
+.container-titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.container-titulo .box-titulo {
+    width: 50%;
+}
+
+.container-titulo .box-titulo h1 {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #9C93B5;
+}
+
+.container-titulo .box-titulo p {
+    text-align: center;
+    font-size: 20px;
+    color: #9C93B5;
+}

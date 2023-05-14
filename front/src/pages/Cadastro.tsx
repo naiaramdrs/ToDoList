@@ -1,14 +1,43 @@
 import {IonContent, IonPage} from '@ionic/react';
+import React, { useState } from "react";
+import MensagemInvalida from '../components/MensagemInvalida';
+import { validaEmail, validaSenha } from "../util/Validacao";
+import Cabecalho from '../components/Cabecalho';
 import Botao from '../components/Botao';
 import Input from '../components/Input';
-import MensagemInvalida from '../components/MensagemInvalida';
-import Cabecalho from '../components/Cabecalho';
 import './Cadastro.css';
-import Config from '../config';
 
 const Cadastro: React.FC = () => {
+  const [email, setEmail] = useState({ value: "", invalidity: "" });
+  const [password, setPassword] = useState({ value: "", invalidity: "" });
+
+  
+  const changeEmail = (e:any) => {
+    const value = e.target.value;
+    setEmail({ ...email, value });
+  }
+
+
+  const changePassword = (e:any) => {
+    const value = e.target.value;
+
+    setPassword({ ...password, value });
+  };
+
+  const validateForm = () => {
+    const invalidityEmail = validaEmail(email.value);
+    const invalidityPassword = validaSenha(password.value);
+
+    setEmail({ ...email, invalidity: invalidityEmail });
+    setPassword({ ...password, invalidity: invalidityPassword });
+
+    return !invalidityEmail || !invalidityPassword ? true : false;
+  };
+
   const submit = () => {
-    console.log(Config.API_URL);
+    if (validateForm()) {
+      // o que?
+    }
   };
 
   return (
@@ -31,14 +60,14 @@ const Cadastro: React.FC = () => {
             <MensagemInvalida />
             <Input label="Sobrenome" labelPlacement="floating" fill="outline" color="medium" type='text'/>
             <MensagemInvalida />
-            <Input label="Email" labelPlacement="floating" fill="outline" color="medium" type='email'/>
-            <MensagemInvalida />
-            <Input label="Senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
-            <MensagemInvalida />
+            <Input onChange={changeEmail} value={email.value}  label="Email" labelPlacement="floating" fill="outline" color="medium" type='email'/>
+            <MensagemInvalida msg={email.invalidity}/>
+            <Input onChange={changePassword} value={password.value} label="Senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
+            <MensagemInvalida msg={password.invalidity}/>
             <Input label="Confirme sua senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
             <MensagemInvalida />
             <Botao expand="full" fill="solid" color="success" onClick={submit}>Entrar</Botao>
-            <p>Já tem cadastro? volte para <a href="/">login</a></p>
+            <p>Já tem cadastro? volte para <a href="/login">login</a></p>
 
           </div>
         </div>

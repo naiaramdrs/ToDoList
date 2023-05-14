@@ -36,8 +36,9 @@ const Login: React.FC = () => {
 
   const submit = () => {
     if (validateForm()) {
-      // o que?
+      //se validar
     }
+    // se nao validar
   };
   
   return (

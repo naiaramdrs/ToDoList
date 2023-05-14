@@ -1,5 +1,25 @@
-.titulo {
+.container {
+    display: flex;
+}
+
+.container .primeira-caixa{
+    width: 100%;
+}
+
+.primeira-caixa .titulo {
     text-align: left;
     text-decoration: none;
     color: #9C93B5;
+    font-weight: bold;
+}
+
+.primeira-caixa .logo-tipo {
+    width: 25px;
+}
+
+.botao {
+    text-decoration: none;
+    color: #9C93B5;
+    margin: 15px;
+    font-weight: bold;
 }

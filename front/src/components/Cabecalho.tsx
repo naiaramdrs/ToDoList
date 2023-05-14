@@ -1,4 +1,4 @@
-import {IonHeader, IonTitle, IonToolbar } from '@ionic/react';
+import { IonHeader, IonTitle, IonToolbar } from '@ionic/react';
 import './Cabecalho.css'
 
 const Cabecalho = (props:any) => {
@@ -7,7 +7,19 @@ const Cabecalho = (props:any) => {
     <>
        <IonHeader collapse="fade">
         <IonToolbar>
-          <IonTitle ><a href="/" className='titulo'>{props.title}</a></IonTitle>
+          <IonTitle >
+            <div className='container'>
+              <div className='primeira-caixa'>
+                <img src="/check.png" alt="check" className="logo-tipo"/>
+                <a href="/inicio" className='titulo'>{props.title}</a>
+              </div>
+
+              <div className='segunda-caixa'>
+                <a href='/' className='botao'>{props.args}</a>
+              </div>
+              
+            </div>
+            </IonTitle>
         </IonToolbar>
       </IonHeader>
     </>
