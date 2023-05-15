@@ -1,0 +1,26 @@
+.card-one {
+    text-align: center;
+    width: 25%;
+    padding: 15px;
+}
+
+.card-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-image img {
+    width: 200px;
+}
+
+.card-one .card-body h4{
+    font-weight: bold;
+    color: #9C93B5;
+}
+
+.card-one .card-body p{
+    font-weight: bold;
+    color: #aaa1c2;
+    letter-spacing: 1px;
+}

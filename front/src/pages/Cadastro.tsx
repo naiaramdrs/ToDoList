@@ -6,7 +6,6 @@ import Cabecalho from '../components/Cabecalho';
 import Botao from '../components/Botao';
 import Input from '../components/Input';
 import './Cadastro.css';
-<<<<<<< HEAD
 
 const Cadastro: React.FC = () => {
   const [email, setEmail] = useState({ value: "", invalidity: "" });
@@ -38,36 +37,6 @@ const Cadastro: React.FC = () => {
   const submit = () => {
     if (validateForm()) {
       // o que?
-=======
-import { APIError, fetchAPI } from '../api/request';
-import { useState } from 'react';
-
-const Cadastro: React.FC = () => {
-  function createFormValue() {
-    return useState({ value: "", invalidity: "" });
-  }
-  
-  const [nome, setNome] = createFormValue();
-  const [sobrenome, setSobrenome] = createFormValue();
-  const [email, setEmail] = createFormValue();
-  const [senha, setSenha] = createFormValue();
-  const [senhaConf, setSenhaConf] = createFormValue();
-
-  const submit = async () => {
-    try {
-      const data = await fetchAPI('/cadastro', {
-        nome: nome.value,
-        sobrenome: sobrenome.value,
-        email: email.value,
-        senha: senha.value,
-        senha_confirmation: senhaConf.value
-      }, 'POST');
-      console.log(data);
-    } catch (err) {
-      if (err instanceof APIError) {
-        console.log("teve erro:", err.response);
-      }
->>>>>>> 4c3873cbe0b01af977ae627ebd03b835abe83dc9
     }
   };
 
@@ -87,27 +56,16 @@ const Cadastro: React.FC = () => {
         <div className='content'>
           <div className='forms'>
             <h1>CADASTRE-SE</h1>
-            <Input onChange={(e: any) => setNome({...nome, value: e.target.value})} value={nome.value} label="Nome" labelPlacement="floating" fill="outline" color="medium" type='text'/>
+            <Input label="Nome" labelPlacement="floating" fill="outline" color="medium" type='text'/>
             <MensagemInvalida />
 
-            <Input onChange={(e: any) => setSobrenome({...sobrenome, value: e.target.value})} value={sobrenome.value} label="Sobrenome" labelPlacement="floating" fill="outline" color="medium" type='text'/>
+            <Input label="Sobrenome" labelPlacement="floating" fill="outline" color="medium" type='text'/>
             <MensagemInvalida />
-<<<<<<< HEAD
             <Input onChange={changeEmail} value={email.value}  label="Email" labelPlacement="floating" fill="outline" color="medium" type='email'/>
             <MensagemInvalida msg={email.invalidity}/>
             <Input onChange={changePassword} value={password.value} label="Senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
             <MensagemInvalida msg={password.invalidity}/>
             <Input label="Confirme sua senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
-=======
-
-            <Input onChange={(e: any) => setEmail({...email, value: e.target.value})} value={email.value} label="Email" labelPlacement="floating" fill="outline" color="medium" type='email'/>
-            <MensagemInvalida />
-
-            <Input onChange={(e: any) => setSenha({...senha, value: e.target.value})} value={senha.value} label="Senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
-            <MensagemInvalida />
-
-            <Input onChange={(e: any) => setSenhaConf({...senhaConf, value: e.target.value})} value={senhaConf.value} label="Confirme sua senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
->>>>>>> 4c3873cbe0b01af977ae627ebd03b835abe83dc9
             <MensagemInvalida />
 
             <Botao expand="full" fill="solid" color="success" onClick={submit}>Entrar</Botao>

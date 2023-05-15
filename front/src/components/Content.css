@@ -1,0 +1,54 @@
+.caixa-inicio {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+}
+
+.caixa-inicio .box-inicio {
+    width: 35%;
+}
+
+.caixa-inicio .box-conteudo {
+    width: 50%;
+    box-sizing: border-box;
+    color: #9C93B5;
+}
+
+.caixa-inicio .box-conteudo .box-texto {
+    width: 80%;
+}
+
+.caixa-inicio .box-conteudo .box-texto h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.caixa-inicio .box-conteudo .box-texto button {
+    padding: 20px;
+    border-radius: 4px 11px 4px 11px;
+    background: #C6AFC6;
+    font-weight: bold;
+}
+
+.caixa-inicio .box-conteudo .box-texto button a {
+    color: #231F20;
+    text-decoration: none;
+}
+
+.caixa-inicio .box-conteudo .box-texto button:hover {
+    background: #9C93B5;
+}
+
+.caixa-cards {
+    text-align: center;
+}
+
+.caixa-cards h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #9C93B5;
+    margin-top: 50px;
+}
