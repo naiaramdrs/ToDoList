@@ -2,8 +2,8 @@ import { IonContent, IonPage} from '@ionic/react';
 import Cabecalho from '../components/Cabecalho';
 import Titulo from '../components/Titulo';
 import Content from '../components/Content';
-import "./Inicio.css"
 import Card from '../components/Card';
+import "./Inicio.css"
 
 const Inicio: React.FC = () => {
 
@@ -12,7 +12,7 @@ const Inicio: React.FC = () => {
             <Cabecalho title = "ToDolist" args = "Entre"/>
             <IonContent fullscreen>
                 <Titulo />
-
+                <a href="/tarefas">teste</a>
                <Content h2 = "Inscreva-se e melhore o seu jeito de organizar" src = "./terefasok.png"/>
 
                 <div className='container-cards'>
@@ -33,8 +33,6 @@ const Inicio: React.FC = () => {
                     alt = "facilitar" 
                     h4 = "Aumento da produtividade"
                     p = "Um gerenciador de tarefas ajuda a aumentar a produtividade, permitindo que você se concentre nas tarefas mais importantes e reduza o tempo gasto em atividades menos relevantes."/>
-
-
                 </div>
 
                <Content h2 = "Não perca tempo se está  tentando ser mais organizado" src = "./todook.png"/>

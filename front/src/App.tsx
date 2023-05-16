@@ -23,6 +23,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Cadastro from './pages/Cadastro';
 import Inicio from './pages/Inicio';
+import Tarefas from './pages/Tarefas';
 
 setupIonicReact();
 
@@ -30,6 +31,9 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
+        <Route exact path="/tarefas">
+          <Tarefas />
+        </Route>
         <Route exact path="/inicio">
           <Inicio />
         </Route>
