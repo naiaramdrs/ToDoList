@@ -1,42 +1,37 @@
 import {IonContent, IonPage} from '@ionic/react';
-import React, { useState } from "react";
-import MensagemInvalida from '../components/MensagemInvalida';
-import { validaEmail, validaSenha } from "../util/Validacao";
-import Cabecalho from '../components/Cabecalho';
 import Botao from '../components/Botao';
 import Input from '../components/Input';
+import MensagemInvalida from '../components/MensagemInvalida';
+import Cabecalho from '../components/Cabecalho';
 import './Cadastro.css';
+import { APIError, fetchAPI } from '../api/request';
+import { useState } from 'react';
 
 const Cadastro: React.FC = () => {
-  const [email, setEmail] = useState({ value: "", invalidity: "" });
-  const [password, setPassword] = useState({ value: "", invalidity: "" });
-
-  
-  const changeEmail = (e:any) => {
-    const value = e.target.value;
-    setEmail({ ...email, value });
+  function createFormValue() {
+    return useState({ value: "", invalidity: "" });
   }
+  
+  const [nome, setNome] = createFormValue();
+  const [sobrenome, setSobrenome] = createFormValue();
+  const [email, setEmail] = createFormValue();
+  const [senha, setSenha] = createFormValue();
+  const [senhaConf, setSenhaConf] = createFormValue();
 
-
-  const changePassword = (e:any) => {
-    const value = e.target.value;
-
-    setPassword({ ...password, value });
-  };
-
-  const validateForm = () => {
-    const invalidityEmail = validaEmail(email.value);
-    const invalidityPassword = validaSenha(password.value);
-
-    setEmail({ ...email, invalidity: invalidityEmail });
-    setPassword({ ...password, invalidity: invalidityPassword });
-
-    return !invalidityEmail || !invalidityPassword ? true : false;
-  };
-
-  const submit = () => {
-    if (validateForm()) {
-      // o que?
+  const submit = async () => {
+    try {
+      const data = await fetchAPI('/cadastro', {
+        nome: nome.value,
+        sobrenome: sobrenome.value,
+        email: email.value,
+        senha: senha.value,
+        senha_confirmation: senhaConf.value
+      }, 'POST');
+      console.log(data);
+    } catch (err) {
+      if (err instanceof APIError) {
+        console.log("teve erro:", err.response);
+      }
     }
   };
 
@@ -56,17 +51,20 @@ const Cadastro: React.FC = () => {
         <div className='content'>
           <div className='forms'>
             <h1>CADASTRE-SE</h1>
-            <Input label="Nome" labelPlacement="floating" fill="outline" color="medium" type='text'/>
-            <MensagemInvalida />
+            <Input setValue={setNome} value={nome} label="Nome" type='text'/>
+            <MensagemInvalida msg={nome.invalidity} />
 
-            <Input label="Sobrenome" labelPlacement="floating" fill="outline" color="medium" type='text'/>
-            <MensagemInvalida />
-            <Input onChange={changeEmail} value={email.value}  label="Email" labelPlacement="floating" fill="outline" color="medium" type='email'/>
-            <MensagemInvalida msg={email.invalidity}/>
-            <Input onChange={changePassword} value={password.value} label="Senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
-            <MensagemInvalida msg={password.invalidity}/>
-            <Input label="Confirme sua senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
-            <MensagemInvalida />
+            <Input setValue={setSobrenome} value={sobrenome} label="Sobrenome" type='text'/>
+            <MensagemInvalida msg={sobrenome.invalidity} />
+
+            <Input setValue={setEmail} value={email} label="Email" type='email'/>
+            <MensagemInvalida msg={email.invalidity} />
+
+            <Input setValue={setSenha} value={senha} label="Senha" type='password'/>
+            <MensagemInvalida msg={senha.invalidity} />
+
+            <Input setValue={setSenhaConf} value={senhaConf} label="Confirme sua senha" type='password'/>
+            <MensagemInvalida msg={senhaConf.invalidity} />
 
             <Botao expand="full" fill="solid" color="success" onClick={submit}>Entrar</Botao>
             <p>Já tem cadastro? volte para <a href="/login">login</a></p>

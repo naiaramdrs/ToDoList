@@ -58,10 +58,10 @@ const Login: React.FC = () => {
           <div className='content'>
             <div className='forms'>
               <h1>LOGIN</h1>
-              <Input onChange={changeEmail} value={email.value} label="Email" labelPlacement="floating" fill="outline" color="medium" type='email'/>
+              <Input setValue={setEmail} value={email} label="Email" type='email'/>
               <MensagemInvalida msg={email.invalidity} />
              
-              <Input onChange={changePassword} value={password.value} label="Senha" labelPlacement="floating" fill="outline" color="medium" type='password'/>
+              <Input setValue={setPassword} value={password} label="Senha" type='password'/>
               <MensagemInvalida msg={password.invalidity} />
         
               <Botao onClick={submit} expand="full" fill="solid" color="success"> Entrar</Botao>
