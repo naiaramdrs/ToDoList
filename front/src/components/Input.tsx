@@ -19,7 +19,7 @@ const Input = (props: InputProps) => {
   return (
     <>
       <IonInput
-        onIonChange={e => props.setValue({ ...props.value, value: e.target.value as string })}
+        onIonChange={e => props.setValue({ ...props.value, invalidity: "", value: e.target.value as string })}
         value={props.value.value}
         label={props.label}
         labelPlacement={props.labelPlacement as any ?? 'floating'}
