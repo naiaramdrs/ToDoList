@@ -1,0 +1,13 @@
+.list-tarefas {
+    list-style: none;
+    padding: 0;
+}
+
+.list-tarefas li {
+    margin-bottom: 30px;
+}
+
+.list-tarefas li a {
+    text-decoration: none;
+    color: black;
+}
