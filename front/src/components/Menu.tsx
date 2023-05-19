@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import "./Menu.css"
 
 const Menu = (props:any) => {
@@ -29,7 +29,9 @@ const Menu = (props:any) => {
           <IonTitle>{props.tituloFora}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">Tap the button in the toolbar to open the menu.</IonContent>
+      <IonContent className="ion-padding">
+        <IonInput labelPlacement="floating" fill="outline" label='O que você vai fazer?'></IonInput>
+      </IonContent>
     </IonPage>
   </>
   )
