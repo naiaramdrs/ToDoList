@@ -2,7 +2,7 @@
 
 Projeto para o processo seletivo da codex :)
 
-No momento, não tem relação entre o front e backend, porem para rodar ambos:
+Para rodar ambos:
 
 ## Frontend
 ```bash
@@ -15,5 +15,5 @@ npm run dev
 ```bash
 cd back
 npm install # só necessario uma vez
-node ace serve --watch
+node run dev
 ```
