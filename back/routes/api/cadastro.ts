@@ -1,5 +1,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import Usuario from 'App/Models/Usuario'
+import { DateTime } from 'luxon'
 
 const cadastroSchema = schema.create({
   nome: schema.string(),
@@ -14,7 +16,18 @@ const cadastroSchema = schema.create({
 })
 
 Route.post('/api/cadastro', async ({ request }) => {
-  // ignorando os valores, por enquanto
-  await request.validate({ schema: cadastroSchema })
-  return {}
+  const valores = await request.validate({ schema: cadastroSchema })
+
+  const user = await Usuario.create({
+    nome: valores.nome,
+    sobrenome: valores.sobrenome,
+    email: valores.email,
+    senha: 'Boa Tarde',
+    genero: 'Ok',
+    dataNascimento: DateTime.now()
+  })
+
+  return {
+    id: user.id,
+  }
 })
