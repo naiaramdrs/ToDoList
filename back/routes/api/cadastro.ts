@@ -22,7 +22,7 @@ Route.post('/api/cadastro', async ({ request }) => {
     nome: valores.nome,
     sobrenome: valores.sobrenome,
     email: valores.email,
-    senha: 'Boa Tarde',
+    senha: valores.senha,
     genero: 'Ok',
     dataNascimento: DateTime.now()
   })
