@@ -13,6 +13,10 @@ const cadastroSchema = schema.create({
     rules.confirmed(),
     rules.minLength(6)
   ]),
+  genero: schema.string(),
+  dataNascimento: schema.string({}, [
+    rules.regex(/\d{4}-\d{2}-\d{2}/) // YYYY-MM-DD
+  ]),
 })
 
 Route.post('/api/cadastro', async ({ request }) => {
@@ -23,8 +27,8 @@ Route.post('/api/cadastro', async ({ request }) => {
     sobrenome: valores.sobrenome,
     email: valores.email,
     senha: valores.senha,
-    genero: 'Ok',
-    dataNascimento: DateTime.now()
+    genero: valores.genero,
+    dataNascimento: DateTime.fromISO(valores.dataNascimento),
   })
 
   return {

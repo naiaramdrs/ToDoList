@@ -15,6 +15,8 @@ const Cadastro: React.FC = () => {
   const [nome, setNome] = createFormValue();
   const [sobrenome, setSobrenome] = createFormValue();
   const [email, setEmail] = createFormValue();
+  const [genero, setGenero] = createFormValue();
+  const [nascimento, setNascimento] = createFormValue();
   const [senha, setSenha] = createFormValue();
   const [senhaConf, setSenhaConf] = createFormValue();
 
@@ -24,6 +26,8 @@ const Cadastro: React.FC = () => {
         nome: nome.value,
         sobrenome: sobrenome.value,
         email: email.value,
+        genero: genero.value,
+        dataNascimento: nascimento.value,
         senha: senha.value,
         senha_confirmation: senhaConf.value
       }, 'POST');
@@ -59,6 +63,12 @@ const Cadastro: React.FC = () => {
 
             <Input setValue={setEmail} value={email} label="Email" type='email'/>
             <MensagemInvalida msg={email.invalidity} />
+
+            <Input setValue={setGenero} value={genero} label="Gênero" type='text'/>
+            <MensagemInvalida msg={genero.invalidity} />
+
+            <Input setValue={setNascimento} value={nascimento} label="Data de nascimento" type='date'/>
+            <MensagemInvalida msg={nascimento.invalidity} />
 
             <Input setValue={setSenha} value={senha} label="Senha" type='password'/>
             <MensagemInvalida msg={senha.invalidity} />
