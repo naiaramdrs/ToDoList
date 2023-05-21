@@ -6,39 +6,26 @@ import MensagemInvalida from '../components/MensagemInvalida';
 import { validaEmail, validaSenha } from "../util/Validacao";
 import Cabecalho from '../components/Cabecalho';
 import './Login.css';
+import { APIError, fetchAPI } from '../api/request';
 
 
 const Login: React.FC = () => {
   
   const [email, setEmail] = useState({ value: "", invalidity: "" });
   const [password, setPassword] = useState({ value: "", invalidity: "" });
-  
-  const changeEmail = (e:any) => {
-    const value = e.target.value;
-    setEmail({ ...email, value });
-  }
 
-  const changePassword = (e:any) => {
-    const value = e.target.value;
-
-    setPassword({ ...password, value });
-  };
-
-  const validateForm = () => {
-    const invalidityEmail = validaEmail(email.value);
-    const invalidityPassword = validaSenha(password.value);
-
-    setEmail({ ...email, invalidity: invalidityEmail });
-    setPassword({ ...password, invalidity: invalidityPassword });
-
-    return !invalidityEmail && !invalidityPassword ? true : false;
-  };
-
-  const submit = () => {
-    if (validateForm()) {
-      //se validar
+  const submit = async () => {
+    try {
+      const data = await fetchAPI('/login', {
+        email: email.value,
+        senha: password.value,
+      }, 'POST');
+      console.log(data);
+    } catch (err) {
+      if (err instanceof APIError) {
+        console.log("teve erro:", err.response);
+      }
     }
-    // se nao validar
   };
   
   return (

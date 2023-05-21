@@ -17,6 +17,7 @@ export async function fetchAPI(endpoint: string, data: object = {}, method: 'GET
         headers: {
             'Content-Type': 'application/json',
         },
+        credentials: 'include',
         // FIXME: não funciona com GET, tem que usar urlqueryparams ou sla como era
         body: JSON.stringify(data)
     });

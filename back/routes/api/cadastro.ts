@@ -22,11 +22,12 @@ const cadastroSchema = schema.create({
 Route.post('/api/cadastro', async ({ request }) => {
   const valores = await request.validate({ schema: cadastroSchema })
 
+  // FIXME: sql solta uma exceção quando tem dois emails iguais
   const user = await Usuario.create({
     nome: valores.nome,
     sobrenome: valores.sobrenome,
     email: valores.email,
-    senha: valores.senha,
+    password: valores.senha,
     genero: valores.genero,
     dataNascimento: DateTime.fromISO(valores.dataNascimento),
   })
