@@ -33,6 +33,6 @@ Route.post('/api/cadastro', async ({ request }) => {
   })
 
   return {
-    id: user.id,
+    usuario: user.paraFront()
   }
 })

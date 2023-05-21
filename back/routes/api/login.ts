@@ -13,5 +13,7 @@ Route.post('/api/login', async ({ auth, request }) => {
 
   await auth.use('web').attempt(valores.email, valores.senha)
 
-  return auth.user!;
+  return {
+    usuario: auth.user!.paraFront()
+  }
 })

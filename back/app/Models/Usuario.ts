@@ -36,4 +36,13 @@ export default class Usuario extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
+
+  // transforma o usuario em um objeto para o frontend
+  public paraFront(): object {
+    return {
+      id: this.id,
+      nome: this.nome,
+      sobrenome: this.sobrenome,
+    };
+  }
 }

@@ -6,6 +6,8 @@ import Cabecalho from '../components/Cabecalho';
 import './Cadastro.css';
 import { APIError, fetchAPI } from '../api/request';
 import { useState } from 'react';
+import { useHistory } from "react-router-dom";
+import { salvarUsuario } from '../api/auth';
 
 const Cadastro: React.FC = () => {
   function createFormValue() {
@@ -20,6 +22,8 @@ const Cadastro: React.FC = () => {
   const [senha, setSenha] = createFormValue();
   const [senhaConf, setSenhaConf] = createFormValue();
 
+  const history = useHistory();
+
   const submit = async () => {
     try {
       const data = await fetchAPI('/cadastro', {
@@ -32,6 +36,10 @@ const Cadastro: React.FC = () => {
         senha_confirmation: senhaConf.value
       }, 'POST');
       console.log(data);
+
+      salvarUsuario(data.usuario);
+
+      history.push('/tarefas');
     } catch (err) {
       if (err instanceof APIError) {
         console.log("teve erro:", err.response);

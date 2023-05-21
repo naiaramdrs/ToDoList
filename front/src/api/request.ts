@@ -11,7 +11,7 @@ export class APIError {
     }
 };
 
-export async function fetchAPI(endpoint: string, data: object = {}, method: 'GET' | 'POST' = 'GET'): Promise<object> {
+export async function fetchAPI(endpoint: string, data: object = {}, method: 'GET' | 'POST' = 'GET'): Promise<any> {
     const response = await fetch(Config.API_URL + endpoint, {
         method,
         headers: {

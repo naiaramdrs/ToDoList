@@ -3,16 +3,19 @@ import React, { useState } from "react";
 import Botao from '../components/Botao';
 import Input from '../components/Input';
 import MensagemInvalida from '../components/MensagemInvalida';
-import { validaEmail, validaSenha } from "../util/Validacao";
 import Cabecalho from '../components/Cabecalho';
 import './Login.css';
 import { APIError, fetchAPI } from '../api/request';
+import { useHistory } from 'react-router-dom';
+import { salvarUsuario } from '../api/auth';
 
 
 const Login: React.FC = () => {
   
   const [email, setEmail] = useState({ value: "", invalidity: "" });
   const [password, setPassword] = useState({ value: "", invalidity: "" });
+
+  const history = useHistory();
 
   const submit = async () => {
     try {
@@ -21,6 +24,10 @@ const Login: React.FC = () => {
         senha: password.value,
       }, 'POST');
       console.log(data);
+
+      salvarUsuario(data.usuario);
+
+      history.push('/tarefas');
     } catch (err) {
       if (err instanceof APIError) {
         console.log("teve erro:", err.response);
