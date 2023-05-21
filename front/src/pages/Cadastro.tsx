@@ -76,7 +76,7 @@ const Cadastro: React.FC = () => {
             <Input setValue={setSenhaConf} value={senhaConf} label="Confirme sua senha" type='password'/>
             <MensagemInvalida msg={senhaConf.invalidity} />
 
-            <Botao expand="full" fill="solid" color="success" onClick={submit}>Entrar</Botao>
+            <Botao expand="full" fill="solid" color="success" onClick={submit}>Cadastrar</Botao>
             <p>Já tem cadastro? volte para <a href="/login">login</a></p>
 
           </div>
