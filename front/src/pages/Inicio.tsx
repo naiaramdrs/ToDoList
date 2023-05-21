@@ -9,7 +9,7 @@ const Inicio: React.FC = () => {
 
     return (
         <IonPage>
-            <Cabecalho title = "ToDolist" args = "Entre"/>
+            <Cabecalho title = "ToDolist" args = "Entre" link = "/login" />
             <IonContent fullscreen>
                 <Titulo />
                 <a href="/tarefas">teste</a>

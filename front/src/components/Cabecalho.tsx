@@ -15,7 +15,7 @@ const Cabecalho = (props:any) => {
               </div>
 
               <div className='segunda-caixa'>
-                <a href='/' className='botao'>{props.args}</a>
+                <a href={props.link} className='botao'>{props.args}</a>
               </div>
               
             </div>
