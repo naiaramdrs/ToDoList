@@ -1,5 +1,6 @@
 import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import "./Menu.css"
+import { getUsuario } from '../api/auth';
 
 const Menu = (props:any) => {
 
@@ -30,6 +31,7 @@ const Menu = (props:any) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
+        <p>Bem vindo { getUsuario()?.nome ?? 'NÃO LOGADO' }</p>
         <IonInput labelPlacement="floating" fill="outline" label='O que você vai fazer?'></IonInput>
       </IonContent>
     </IonPage>
