@@ -25,7 +25,7 @@ function Importante() {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonMenuButton></IonMenuButton>
+            <IonMenuButton color="success"></IonMenuButton>
           </IonButtons>
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
@@ -41,7 +41,7 @@ function Importante() {
       <IonContent className="ion-padding">
         <div className='container-todo'>
           <div className='todoList'>
-            <header>Tarefas importantes</header>
+            <header>TAREFAS IMPORTANTES</header>
             <Tasks tarefa = "Tarefa 1"/>
             <Tasks tarefa = "Tarefa 2"/>
             <Tasks tarefa = "Tarefa 3"/>
