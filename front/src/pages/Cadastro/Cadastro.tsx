@@ -1,13 +1,13 @@
 import {IonContent, IonPage} from '@ionic/react';
-import Botao from '../components/Botao';
-import Input from '../components/Input';
-import MensagemInvalida from '../components/MensagemInvalida';
-import Cabecalho from '../components/Cabecalho';
+import Botao from '../../components/botao/Botao';
+import Input from '../../components/uteis/Input';
+import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
+import Cabecalho from '../../components/cabecalho/Cabecalho';
 import './Cadastro.css';
-import { APIError, fetchAPI } from '../api/request';
+import { APIError, fetchAPI } from '../../api/request';
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { salvarUsuario } from '../api/auth';
+import { salvarUsuario } from '../../api/auth';
 
 const Cadastro: React.FC = () => {
   function createFormValue() {

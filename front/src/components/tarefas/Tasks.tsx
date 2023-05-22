@@ -9,7 +9,7 @@ const Tasks = (props:any) => {
                 <ul className="list">
                     <li>
                         <div className="check">
-                            <IonCheckbox />
+                            <IonCheckbox/>
                         </div>
                         <label className="task">{props.tarefa}</label>
                         <button className="remove"></button>

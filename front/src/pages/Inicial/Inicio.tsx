@@ -1,8 +1,8 @@
 import { IonContent, IonPage} from '@ionic/react';
-import Cabecalho from '../components/Cabecalho';
-import Titulo from '../components/Titulo';
-import Content from '../components/Content';
-import Card from '../components/Card';
+import Cabecalho from '../../components/cabecalho/Cabecalho';
+import Titulo from '../../components/uteis/Titulo';
+import Content from '../../components/content/Content';
+import Card from '../../components/cards/Card';
 import "./Inicio.css"
 
 const Inicio: React.FC = () => {
