@@ -1,7 +1,7 @@
 import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
-import "../Tarefas.css"
 import Tasks from '../../../components/tarefas/Tasks';
+import "../Tarefas.css"
 
 
 function MeuDia() {
@@ -16,8 +16,8 @@ function MeuDia() {
       <IonContent className="ion-padding">
         <ul className='list-tarefas'>
             <li><a href='/meudia'>🌞 Meu Dia</a></li>
-            <li><a href='/tarefas'>⭐ Importante</a></li>
-            <li><a href='/tarefas'>📅 Planejado</a></li>
+            <li><a href='/importante'>⭐ Importante</a></li>
+            <li><a href='/planejado'>📅 Planejado</a></li>
         </ul>
       </IonContent>
     </IonMenu>
@@ -33,7 +33,7 @@ function MeuDia() {
               <IonAvatar slot="start">
                 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                 </IonAvatar>
-                <IonLabel><a>Perfil</a></IonLabel>
+                <IonLabel><a href='/perfil'>Perfil</a></IonLabel>
             </IonItem>
           </div>
         </IonToolbar>

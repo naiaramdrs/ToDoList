@@ -25,6 +25,9 @@ import Cadastro from './pages/Cadastro/Cadastro';
 import Inicio from './pages/Inicial/Inicio';
 import Tarefas from './pages/Tarefas/Tarefas';
 import MeuDia from './pages/Tarefas/meuDia/MeuDia';
+import Importante from './pages/Tarefas/importante/Importante';
+import Planejado from './pages/Tarefas/planejado/Planejado';
+import Perfil from './pages/Perfil/Perfil';
 
 setupIonicReact();
 
@@ -46,6 +49,15 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/meudia">
           <MeuDia />
+        </Route>
+        <Route exact path="/importante">
+          <Importante />
+        </Route>
+        <Route exact path="/planejado">
+          <Planejado />
+        </Route>
+        <Route exact path="/perfil">
+          <Perfil />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

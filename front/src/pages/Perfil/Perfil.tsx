@@ -1,10 +1,8 @@
 import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
-import { getUsuario } from '../../api/auth';
-import "./Tarefas.css"
 
 
-function Tarefas() {
+function Perfil() {
   return (
    <>
     <IonMenu contentId="main-content">
@@ -39,20 +37,10 @@ function Tarefas() {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <div className='container-todo' id="teste">
-          <div className='todoList'>
-            <div className='avatar'>
-              <IonAvatar slot="start">
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-              </IonAvatar>
-            </div>
-            <header>Bem-vindo { getUsuario()?.nome ?? 'NÃO LOGADO' }</header>
-            <p className='frase'>Não esqueça que deixar suas tarefas organizadas é o mais importante.</p>
-          </div>
-        </div>
+        
       </IonContent>
     </IonPage>
    </>
   );
 }
-export default Tarefas;
+export default Perfil;
