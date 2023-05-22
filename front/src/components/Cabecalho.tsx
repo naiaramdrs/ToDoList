@@ -11,7 +11,7 @@ const Cabecalho = (props:any) => {
             <div className='container'>
               <div className='primeira-caixa'>
                 <img src="/check.png" alt="check" className="logo-tipo"/>
-                <a href="/inicio" className='titulo'>{props.title}</a>
+                <a href="/" className='titulo'>{props.title}</a>
               </div>
 
               <div className='segunda-caixa'>

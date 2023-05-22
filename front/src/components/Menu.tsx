@@ -1,8 +1,21 @@
 import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import "./Menu.css"
 import { getUsuario } from '../api/auth';
+import React, {useState, useRef} from 'react';
+import Tasks from './Tasks';
+import "./Menu.css"
 
 const Menu = (props:any) => {
+
+  const [listaTarefas, setListaTarefas] = useState(() => {return []})
+  const [tarefa, setTarefa] = useState(() => {return ''})
+
+  const idTarefa = useRef(0)
+
+  function adicionarTarefa (){
+    setListaTarefas(old => { return [...old]})
+    idTarefa.current++
+  }
+
 
   return (
     <>
@@ -31,8 +44,20 @@ const Menu = (props:any) => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <p>Bem vindo { getUsuario()?.nome ?? 'NÃO LOGADO' }</p>
-        <IonInput labelPlacement="floating" fill="outline" label='O que você vai fazer?'></IonInput>
+        <div className='container-todo'>
+          <div className='todoList'>
+            <header>Bem-vindo { getUsuario()?.nome ?? 'NÃO LOGADO' }</header>
+            <Tasks tarefa = "Tarefa 1"/>
+            <Tasks tarefa = "Tarefa 2"/>
+            <Tasks tarefa = "Tarefa 3"/>
+            <br/>
+            <footer>
+              <IonInput labelPlacement="floating" fill="outline" label='O que você vai fazer?'></IonInput>
+            </footer>
+          </div>
+        </div>
+        
+        
       </IonContent>
     </IonPage>
   </>

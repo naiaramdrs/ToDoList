@@ -11,3 +11,24 @@
     text-decoration: none;
     color: black;
 }
+
+.container-todo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.todoList {
+    width: 100%;
+    max-width: 700px;
+}
+
+.todoList header {
+    text-align: center;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 15px;
+    font-size: 1.3em;
+    color: rgb(94, 94, 94);
+}

@@ -1,0 +1,42 @@
+.check-list ul.list {
+   list-style: none;
+   margin: 0;
+   padding: 0; 
+}
+
+.check-list ul.list li {
+    position: relative;
+   
+    display: flex;
+    align-items: center;
+    padding: 20px;  
+}
+
+.check-list ul.list li:hover button.remove {
+    opacity: 1;
+}
+
+.check-list ul.list .check {
+    margin-right: 20px;
+}
+
+.check-list button.remove {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: none;
+    outline: none;
+    background-color: red;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+.check-list button.remove::after {
+    content: 'x';
+    color: white;
+    display: block;
+}
