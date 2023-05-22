@@ -24,6 +24,7 @@ import './theme/variables.css';
 import Cadastro from './pages/Cadastro/Cadastro';
 import Inicio from './pages/Inicial/Inicio';
 import Tarefas from './pages/Tarefas/Tarefas';
+import MeuDia from './pages/Tarefas/meuDia/MeuDia';
 
 setupIonicReact();
 
@@ -42,6 +43,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/cadastro">
           <Cadastro />
+        </Route>
+        <Route exact path="/meudia">
+          <MeuDia />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

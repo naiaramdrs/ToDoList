@@ -12,11 +12,14 @@
     color: black;
 }
 
+#teste {
+    min-height: 85vh;
+}
+
 .container-todo {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 85vh;
     align-items: center;
 }
 
@@ -41,6 +44,7 @@
     text-align: center;
     color: rgb(94, 94, 94);
     font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .todoList .avatar {

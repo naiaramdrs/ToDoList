@@ -1,16 +1,16 @@
-import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
-import { getUsuario } from '../../api/auth';
-import "./Tarefas.css"
+import "../Tarefas.css"
+import Tasks from '../../../components/tarefas/Tasks';
 
 
-function Tarefas() {
+function MeuDia() {
   return (
    <>
     <IonMenu contentId="main-content">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tarefas</IonTitle>
+          <IonTitle>Meu Dia</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
@@ -39,15 +39,16 @@ function Tarefas() {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <div className='container-todo' id="teste">
+        <div className='container-todo'>
           <div className='todoList'>
-            <div className='avatar'>
-              <IonAvatar slot="start">
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-              </IonAvatar>
-            </div>
-            <header>Bem-vindo { getUsuario()?.nome ?? 'NÃO LOGADO' }</header>
-            <p className='frase'>Não esqueça que deixar suas tarefas organizadas é o mais importante.</p>
+            <header>Tarefas do dia</header>
+            <Tasks tarefa = "Tarefa 1"/>
+            <Tasks tarefa = "Tarefa 2"/>
+            <Tasks tarefa = "Tarefa 3"/>
+            <br/>
+            <footer>
+              <IonInput labelPlacement="floating" fill="outline" label='O que você vai fazer?'></IonInput>
+            </footer>
           </div>
         </div>
       </IonContent>
@@ -55,4 +56,4 @@ function Tarefas() {
    </>
   );
 }
-export default Tarefas;
+export default MeuDia;
