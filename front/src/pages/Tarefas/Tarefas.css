@@ -32,4 +32,29 @@
     padding: 15px;
     font-size: 1.3em;
     color: rgb(94, 94, 94);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.todoList .frase {
+    text-align: center;
+    color: rgb(94, 94, 94);
+    font-weight: bold;
+}
+
+.todoList .avatar {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.tolbar-task{
+    display: flex;
+}
+
+.tolbar-task a {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(94, 94, 94);
 }
