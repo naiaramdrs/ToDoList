@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasMany, beforeSave, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Hash from '@ioc:Adonis/Core/Hash'
+import Tarefa from './Tarefa'
 
 export default class Usuario extends BaseModel {
   @column({ isPrimary: true })
@@ -36,6 +37,12 @@ export default class Usuario extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
+
+  //fiz essa mudança para permitir que o usuário tenha tarefas
+  @hasMany(() => Tarefa, {
+    foreignKey: 'criadoPor'
+  })
+  public tarefas: HasMany<typeof Tarefa>
 
   // transforma o usuario em um objeto para o frontend
   public paraFront(): object {
