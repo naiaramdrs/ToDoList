@@ -6,32 +6,27 @@ export default class Tarefa extends BaseModel {
 
   @column({ isPrimary: true })
   public id: number
-  
+
   @column()
   public idCriador: number
 
-  @column()
-  public criadoPor: string
+  @belongsTo(() => Usuario, {
+    localKey: 'idCriador',
+  })
+  public criador: BelongsTo<typeof Usuario>
 
   @column()
-  public nomeTarefa: string
+  public nome: string
 
   @column()
   public descricao: string
 
   @column()
-  public tarefaConcluida: boolean
+  public concluida: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
-  @belongsTo(() => Usuario, {
-    localKey: 'criadoPor',
-  })
-  
-  public criador: BelongsTo<typeof Usuario>
-  
 }

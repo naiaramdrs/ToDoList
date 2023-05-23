@@ -16,8 +16,8 @@ export default class TarefasController {
 
     const tarefa = await Tarefa.create({
       //idCriador: auth.user?.id,
-      criadoPor: dados.criadoPor,
-      nomeTarefa: dados.nomeTarefa,
+      // criadoPor: dados.criadoPor,
+      nome: dados.nomeTarefa,
       descricao: dados.descricao
     })
 

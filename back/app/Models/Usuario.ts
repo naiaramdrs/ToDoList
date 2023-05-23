@@ -40,7 +40,7 @@ export default class Usuario extends BaseModel {
 
   //fiz essa mudança para permitir que o usuário tenha tarefas
   @hasMany(() => Tarefa, {
-    foreignKey: 'criadoPor'
+    foreignKey: 'idCriador'
   })
   public tarefas: HasMany<typeof Tarefa>
 
