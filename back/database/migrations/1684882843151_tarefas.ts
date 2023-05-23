@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   public async up () {
     this.schema.alterTable(this.tableName, (table) => {
-      table.dropColumn('criadoPor')
+      table.dropColumn('criado_por')
 
       table
         .renameColumn('nome_tarefa', 'nome')
@@ -15,7 +15,7 @@ export default class extends BaseSchema {
 
   public async down () {
     this.schema.alterTable(this.tableName, (table) => {
-      table.string('criadoPor')
+      table.string('criado_por')
 
       table
         .renameColumn('nome', 'nome_tarefa')

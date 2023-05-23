@@ -1,48 +1,73 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Tarefa from 'App/Models/Tarefa'
-import Usuario from 'App/Models/Usuario'
-import Database from '@ioc:Adonis/Lucid/Database';
-
 
 export default class TarefasController {
-  public async index({}: HttpContextContract) {
-    const tarefas = await Tarefa.all()
-    return tarefas;
+  public async index({ auth }: HttpContextContract) {
+    await auth.use('web').authenticate()
 
+    const tarefas = await auth.user!.related('tarefas').query();
+
+    return tarefas;
   }
 
-  public async store({request, auth}: HttpContextContract) {
-    const dados = request.only(['criadoPor', 'nomeTarefa', 'descricao'])
+  public async store({ request, auth }: HttpContextContract) {
+    const dados = request.only(['nome', 'descricao'])
 
-    const tarefa = await Tarefa.create({
-      //idCriador: auth.user?.id,
-      // criadoPor: dados.criadoPor,
-      nome: dados.nomeTarefa,
+    await auth.use('web').authenticate()
+
+    const tarefa = await auth.user!.related('tarefas').create({
+      nome: dados.nome,
       descricao: dados.descricao
     })
 
     return tarefa
   }
 
-  public async show({params}: HttpContextContract) {
+  public async show({ params, auth }: HttpContextContract) {
     const tarefa = await Tarefa.findOrFail(params.id)
 
+    await auth.use('web').authenticate()
+
+    if (tarefa.idCriador !== auth.user!.id) {
+      // TODO: não sei qual erro botar aqui..
+      throw new Error("??")
+    }
+
     return tarefa
   }
 
-  public async update({request, auth}: HttpContextContract) {
-    const body = request.only(['nomeTarefa', 'descricao', 'tarefa_concluida'])
-    //const idCriador = auth.user?.id
+  public async update({ request, auth }: HttpContextContract) {
+    const body = request.only(['nome', 'descricao', 'concluida'])
+
+    await auth.use('web').authenticate()
+
     const tarefaId = request.param('id')
     const tarefa = await Tarefa.findOrFail(tarefaId)
 
-    await tarefa.merge(body).save()
+    if (tarefa.idCriador !== auth.user!.id) {
+      // TODO: não sei qual erro botar aqui..
+      throw new Error("??")
+    }
+
+    await tarefa.merge({
+      nome: body.nome,
+      descricao: body.descricao,
+      concluida: body.concluida
+    }).save()
+
     return tarefa
   }
 
-  public async destroy({request}: HttpContextContract) {
+  public async destroy({ request, auth }: HttpContextContract) {
+    await auth.use('web').authenticate()
+
     const tarefaId = request.param('id')
     const tarefa = await Tarefa.findOrFail(tarefaId)
+
+    if (tarefa.idCriador !== auth.user!.id) {
+      // TODO: não sei qual erro botar aqui..
+      throw new Error("??")
+    }
 
     await tarefa.delete()
   }
