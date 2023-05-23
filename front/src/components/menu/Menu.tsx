@@ -19,7 +19,7 @@ const myDate = new Date(Date.now()).toLocaleString().split(',')[0];
 const handleAddTask = (taskName: string) => {
   let newList = [...list];
   newList.push({
-    id: list.length,
+    id: list.length + 1,
     nome: taskName,
     done: false,
     data: myDate
