@@ -45,6 +45,11 @@
     display: block;
 }
 
+.data-task {
+    margin-left: 10%;
+    font-size: 1em;
+}
+
 #marcado {
     text-decoration: line-through;
 }

@@ -14,14 +14,15 @@ const [list, setList] = useState<Item[]>([
 ])
 
 const [inputText, setInputText] = useState('')
+const myDate = new Date(Date.now()).toLocaleString().split(',')[0];
 
 const handleAddTask = (taskName: string) => {
   let newList = [...list];
   newList.push({
-    id: list.length + 1,
+    id: list.length,
     nome: taskName,
     done: false,
-    data: '12/10'
+    data: myDate
   })
   setList(newList);
 }
