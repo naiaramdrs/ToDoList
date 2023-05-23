@@ -8,8 +8,8 @@ export default class extends BaseSchema {
       table.dropColumn('criadoPor')
 
       table
-        .renameColumn('nomeTarefa', 'nome')
-        .renameColumn('tarefaConcluida', 'concluida')
+        .renameColumn('nome_tarefa', 'nome')
+        .renameColumn('tarefa_concluida', 'concluida')
     })
   }
 
@@ -18,8 +18,8 @@ export default class extends BaseSchema {
       table.string('criadoPor')
 
       table
-        .renameColumn('nome', 'nomeTarefa')
-        .renameColumn('concluida', 'tarefaConcluida')
+        .renameColumn('nome', 'nome_tarefa')
+        .renameColumn('concluida', 'tarefa_concluida')
     })
   }
 }
