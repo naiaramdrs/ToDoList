@@ -2,8 +2,8 @@ import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, Io
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
 import {KeyboardEvent, useState} from 'react';
 import Tasks from '../tarefas/Tasks';
-import "../../pages/Tarefas/Tarefas.css"
 import {Item} from '../../util/Item';
+import "../../pages/Tarefas/Tarefas.css"
 import "./Menu.css"
 
 function Menu(props:any) {
@@ -42,6 +42,13 @@ const handleTaskChange = (id: number, done: boolean) => {
   }
   setList(newList);
 }
+
+const deleteTask = (id: number) => {
+  let newList = [...list];
+  newList.splice(id, 1);
+
+  setList(newList)
+  }
 
 
   return (
@@ -86,7 +93,9 @@ const handleTaskChange = (id: number, done: boolean) => {
               <Tasks 
               key= {index} 
               item = {item} 
-              onChange={handleTaskChange}/>
+              onChange={handleTaskChange}
+              deleteTask={deleteTask}
+              />
             ))}
 
             <br/>

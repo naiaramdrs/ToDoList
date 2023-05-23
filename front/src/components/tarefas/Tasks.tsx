@@ -2,14 +2,14 @@ import { IonCheckbox } from '@ionic/react';
 import "./Tasks.css"
 import { Item } from '../../util/Item';
 import { useState } from 'react';
-import { Style } from '@capacitor/status-bar';
 
 type Props = {
     item: Item;
     onChange: (id: number, done: boolean) => void
+    deleteTask: (id: number) => void
 }
 
-const Tasks = ({ item, onChange }: Props) => {
+const Tasks = ({ item, onChange, deleteTask }: Props) => {
 
     return (
         <>
@@ -23,7 +23,7 @@ const Tasks = ({ item, onChange }: Props) => {
                             />
                         </div>
                         <label className="task">{item.nome}</label>
-                        <button className="remove"></button>
+                        <button className="remove" onClick={() => deleteTask(item.id - 1)}></button>
                     </li>
                 </ul>
             </div>
