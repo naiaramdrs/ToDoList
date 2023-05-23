@@ -1,10 +1,17 @@
 import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
+import {useState} from 'react';
 import Tasks from '../tarefas/Tasks';
 import "../../pages/Tarefas/Tarefas.css"
-
+import {Item} from '../../util/Item';
 
 function Menu(props:any) {
+
+const [list, setList] = useState<Item[]>([
+  {id: 1, nome: 'tarefa', done: false, data: '12/10'},
+  {id: 2, nome: 'tarefa2', done: true, data: '12/10'}
+])
+
   return (
    <>
     <IonMenu contentId="main-content">
@@ -42,9 +49,11 @@ function Menu(props:any) {
         <div className='container-todo'>
           <div className='todoList'>
             <header>{props.principal}</header>
-            <Tasks tarefa = "Tarefa 1"/>
-            <Tasks tarefa = "Tarefa 2"/>
-            <Tasks tarefa = "Tarefa 3"/>
+
+            {list.map((item, index) => (
+              <Tasks key= {index} item = {item}/>
+            ))}
+
             <br/>
             <footer>
               <IonInput labelPlacement="floating" fill="outline" label='O que você vai fazer?'></IonInput>

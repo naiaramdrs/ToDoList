@@ -1,7 +1,16 @@
 import { IonCheckbox } from '@ionic/react';
 import "./Tasks.css"
+import { Item } from '../../util/Item';
+import { useState } from 'react';
 
-const Tasks = (props:any) => {
+type Props = {
+    item: Item;
+}
+
+
+const Tasks = ({item}: Props) => {
+
+    const [isChecked, setIsChecked] = useState(item.done)
 
     return (
         <>
@@ -9,9 +18,12 @@ const Tasks = (props:any) => {
                 <ul className="list">
                     <li>
                         <div className="check">
-                            <IonCheckbox/>
+                            <IonCheckbox 
+                            checked={isChecked}
+                            onChange={e => setIsChecked((e.target as HTMLInputElement).checked)}
+                            />
                         </div>
-                        <label className="task">{props.tarefa}</label>
+                        <label className="task" id={item.done ? "marcado" : "nada"}>{item.nome}</label>
                         <button className="remove"></button>
                     </li>
                 </ul>

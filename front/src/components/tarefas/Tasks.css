@@ -44,3 +44,11 @@
     color: white;
     display: block;
 }
+
+#marcado {
+    text-decoration: line-through;
+}
+
+#nada {
+    text-decoration: none;
+}
