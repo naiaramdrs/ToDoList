@@ -2,32 +2,31 @@ import { IonCheckbox } from '@ionic/react';
 import "./Tasks.css"
 import { Item } from '../../util/Item';
 import { useState } from 'react';
+import { Style } from '@capacitor/status-bar';
 
 type Props = {
     item: Item;
+    onChange: (id: number, done: boolean) => void
 }
 
-
-const Tasks = ({item}: Props) => {
-
-    const [isChecked, setIsChecked] = useState(item.done)
+const Tasks = ({ item, onChange }: Props) => {
 
     return (
         <>
-            <section className="check-list">
+            <div className="check-list">
                 <ul className="list">
-                    <li>
+                    <li id={item.done ? "marcado" : "nada"}>
                         <div className="check">
                             <IonCheckbox 
-                            checked={isChecked}
-                            onChange={e => setIsChecked((e.target as HTMLInputElement).checked)}
+                            checked={item.done}
+                            onIonChange={e => onChange(item.id, e.target.checked)}
                             />
                         </div>
-                        <label className="task" id={item.done ? "marcado" : "nada"}>{item.nome}</label>
+                        <label className="task">{item.nome}</label>
                         <button className="remove"></button>
                     </li>
                 </ul>
-            </section>
+            </div>
         </>
     )
   };
