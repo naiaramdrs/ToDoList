@@ -20,7 +20,7 @@ export function verificarLogado(): boolean {
 }
 
 export function getUsuario(): Usuario | null {
-    return JSON.parse(localStorage.getItem(CHAVE_USUARIO)!);
+    return JSON.parse(localStorage.getItem(CHAVE_USUARIO) ?? "null");
 }
 
 export function salvarUsuario(user: Usuario) {

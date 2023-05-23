@@ -26,6 +26,11 @@ const loginSchema = schema.create({
   senha: schema.string(),
 })
 
+const editarSchema = schema.create({
+  nome: schema.string(),
+  sobrenome: schema.string(),
+})
+
 export default class UsuariosController {
   public async cadastro({ request }: HttpContextContract) {
     const valores = await request.validate({ schema: cadastroSchema })
@@ -49,6 +54,36 @@ export default class UsuariosController {
     const valores = await request.validate({ schema: loginSchema })
 
     await auth.use('web').attempt(valores.email, valores.senha)
+
+    return {
+      usuario: auth.user!.paraFront()
+    }
+  }
+
+  public async info({ auth }: HttpContextContract) {
+    await auth.use('web').authenticate();
+
+    const user = auth.user!;
+
+    return {
+      usuario: {
+        nome: user.nome,
+        sobrenome: user.sobrenome,
+        email: user.email,
+        dataNascimento: user.dataNascimento,
+      }
+    }
+  }
+
+  public async editar({ auth, request }: HttpContextContract) {
+    const valores = await request.validate({ schema: editarSchema })
+
+    await auth.use('web').authenticate()
+
+    auth.user!.merge({
+      nome: valores.nome,
+      sobrenome: valores.sobrenome
+    }).save();
 
     return {
       usuario: auth.user!.paraFront()
