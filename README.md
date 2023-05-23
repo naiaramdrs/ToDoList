@@ -15,5 +15,6 @@ npm run dev
 ```bash
 cd back
 npm install # só necessario uma vez
+npm run setup # só necessario uma vez
 npm run dev
 ```

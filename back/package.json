@@ -6,7 +6,8 @@
     "dev": "node ace serve --watch",
     "build": "node ace build --production",
     "start": "node server.js",
-    "test": "node ace test"
+    "test": "node ace test",
+    "setup": "cp .env.example .env && mkdir tmp && node ace migration:run --force"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.9.5",
