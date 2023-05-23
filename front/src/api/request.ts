@@ -11,15 +11,14 @@ export class APIError {
     }
 };
 
-export async function fetchAPI(endpoint: string, data: object = {}, method: 'GET' | 'POST' = 'GET'): Promise<any> {
+export async function fetchAPI(endpoint: string, data: object = {}, method: 'GET' | 'POST' = 'POST'): Promise<any> {
     const response = await fetch(Config.API_URL + endpoint, {
         method,
         headers: {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
-        // FIXME: não funciona com GET, tem que usar urlqueryparams ou sla como era
-        body: JSON.stringify(data)
+        body: method === 'POST' ? JSON.stringify(data) : undefined
     });
     const json = await response.json();
     if (json.errors !== undefined && json.errors !== null) {
