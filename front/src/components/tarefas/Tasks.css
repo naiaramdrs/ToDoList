@@ -11,6 +11,11 @@
     padding: 20px;  
 }
 
+.check-list ul.list li:hover {
+    background-color: #f1edfd;
+    transition: 300ms ease;
+}
+
 .check-list ul.list li:hover button.remove {
     opacity: 1;
 }

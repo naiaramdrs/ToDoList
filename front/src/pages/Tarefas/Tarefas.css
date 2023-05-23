@@ -1,3 +1,8 @@
+.sc-ion-input-md-h {
+    --highlight-color: #9C93B5;
+    
+}
+
 .list-tarefas {
     list-style: none;
     padding: 0;
