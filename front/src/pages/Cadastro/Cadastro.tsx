@@ -26,7 +26,7 @@ const Cadastro: React.FC = () => {
 
   const submit = async () => {
     try {
-      const data = await fetchAPI('/cadastro', {
+      const data = await fetchAPI('/usuario/cadastro', {
         nome: nome.value,
         sobrenome: sobrenome.value,
         email: email.value,

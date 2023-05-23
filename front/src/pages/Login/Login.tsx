@@ -19,7 +19,7 @@ const Login: React.FC = () => {
 
   const submit = async () => {
     try {
-      const data = await fetchAPI('/login', {
+      const data = await fetchAPI('/usuario/login', {
         email: email.value,
         senha: password.value,
       }, 'POST');
