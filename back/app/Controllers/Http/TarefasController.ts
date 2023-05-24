@@ -17,7 +17,8 @@ export default class TarefasController {
 
     const tarefa = await auth.user!.related('tarefas').create({
       nome: dados.nome,
-      descricao: dados.descricao
+      descricao: dados.descricao,
+      concluida: false,
     })
 
     return tarefa
