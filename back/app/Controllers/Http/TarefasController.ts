@@ -30,8 +30,7 @@ export default class TarefasController {
     await auth.use('web').authenticate()
 
     if (tarefa.idCriador !== auth.user!.id) {
-      // TODO: não sei qual erro botar aqui..
-      throw new Error("??")
+      throw new Error("Usuário não autorizado.")
     }
 
     return tarefa
@@ -46,8 +45,7 @@ export default class TarefasController {
     const tarefa = await Tarefa.findOrFail(tarefaId)
 
     if (tarefa.idCriador !== auth.user!.id) {
-      // TODO: não sei qual erro botar aqui..
-      throw new Error("??")
+      throw new Error("Usuário não autorizado.")
     }
 
     await tarefa.merge({
@@ -66,8 +64,7 @@ export default class TarefasController {
     const tarefa = await Tarefa.findOrFail(tarefaId)
 
     if (tarefa.idCriador !== auth.user!.id) {
-      // TODO: não sei qual erro botar aqui..
-      throw new Error("??")
+      throw new Error("Usuário não autorizado.")
     }
 
     await tarefa.delete()
