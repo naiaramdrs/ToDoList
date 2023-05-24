@@ -9,6 +9,9 @@
     display: flex;
     align-items: center;
     padding: 20px;  
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: #231F20;
 }
 
 .check-list ul.list li:hover {
@@ -30,7 +33,7 @@
     right: 20px;
     border: none;
     outline: none;
-    background-color: red;
+    background-color: #9C93B5;
     border-radius: 100%;
     width: 20px;
     height: 20px;

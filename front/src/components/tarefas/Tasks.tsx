@@ -20,6 +20,7 @@ const Tasks = ({ item, onChange, deleteTask }: Props) => {
                             <IonCheckbox 
                             checked={item.done}
                             onIonChange={e => onChange(item.id, e.target.checked)}
+                            color = 'success'
                             />
                         </div>
                         <label className="task">{item.nome}</label>

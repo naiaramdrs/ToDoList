@@ -1,10 +1,5 @@
-:host(.checkbox-checked) .checkbox-icon,
-:host(.checkbox-indeterminate) .checkbox-icon {
-    border-color: #9C93B5;
-    background: #9C93B5;
+header.tituloMenu {
+    border-bottom: 1px solid;
+    font-size: 2em;
 }
 
-:host(.checkbox-checked) .checkbox-icon, :host(.checkbox-indeterminate) .checkbox-icon {
-    border-color: #9C93B5;
-    background: #9C93B5;
-}

@@ -8,10 +8,7 @@ import "./Menu.css"
 
 function Menu(props:any) {
 
-const [list, setList] = useState<Item[]>([
-  {id: 1, nome: 'tarefa', done: false, data: '12/10'},
-  {id: 2, nome: 'tarefa2', done: true, data: '12/10'}
-])
+const [list, setList] = useState<Item[]>([])
 
 const [inputText, setInputText] = useState('')
 const myDate = new Date(Date.now()).toLocaleString().split(',')[0];
@@ -88,7 +85,7 @@ const deleteTask = (id: number) => {
       <IonContent className="ion-padding">
         <div className='container-todo'>
           <div className='todoList'>
-            <header>{props.principal}</header>
+            <header className='tituloMenu'>{props.principal}</header>
 
             {list.map((item, index) => (
               <Tasks 
@@ -108,6 +105,7 @@ const deleteTask = (id: number) => {
                value={inputText}
                onIonChange={e => setInputText(e.target.value as string)}
                onKeyUp={handleKeyUp}
+               color="success"
                ></IonInput>
             </footer>
           </div>
