@@ -1,13 +1,14 @@
-import { IonContent, IonPage} from '@ionic/react';
 import React, { useState } from "react";
+import { IonContent, IonPage} from '@ionic/react';
 import Botao from '../../components/botao/Botao';
 import Input from '../../components/uteis/Input';
 import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
 import Cabecalho from '../../components/cabecalho/Cabecalho';
-import './Login.css';
 import { APIError, fetchAPI } from '../../api/request';
 import { useHistory } from 'react-router-dom';
 import { salvarUsuario } from '../../api/auth';
+import { validaEmail, validaSenha } from "../../util/Validacao";
+import './Login.css';
 
 
 const Login: React.FC = () => {
@@ -17,7 +18,18 @@ const Login: React.FC = () => {
 
   const history = useHistory();
 
+  const validateForm = () => {
+    const invalidityEmail = validaEmail(email.value);
+    const invalidityPassword = validaSenha(password.value);
+
+    setEmail({ ...email, invalidity: invalidityEmail });
+    setPassword({ ...password, invalidity: invalidityPassword });
+
+    return !invalidityEmail && !invalidityPassword ? true : false;
+  };
+
   const submit = async () => {
+   if (validateForm()){
     try {
       const data = await fetchAPI('/usuario/login', {
         email: email.value,
@@ -33,6 +45,7 @@ const Login: React.FC = () => {
         console.log("teve erro:", err.response);
       }
     }
+   }
   };
   
   return (
