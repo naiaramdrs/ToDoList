@@ -23,6 +23,10 @@
     opacity: 1;
 }
 
+.check-list ul.list li:hover button.pincel {
+    opacity: 1;
+}
+
 .check-list ul.list .check {
     margin-right: 20px;
 }
@@ -40,6 +44,25 @@
     cursor: pointer;
     opacity: 0;
     transition: opacity 300ms ease;
+}
+
+.check-list button.pincel {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    border: none;
+    outline: none;
+    background-color: #9C93B5;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+.check-list button.pincel::before {
+    display: block;
 }
 
 .check-list button.remove::after {

@@ -7,9 +7,10 @@ type Props = {
     item: Item;
     onChange: (id: number, done: boolean) => void
     deleteTask: (id: number) => void
+    editTask: (id:number, nome: String) => void
 }
 
-const Tasks = ({ item, onChange, deleteTask }: Props) => {
+const Tasks = ({ item, onChange, deleteTask, editTask }: Props) => {
 
     return (
         <>
@@ -24,7 +25,11 @@ const Tasks = ({ item, onChange, deleteTask }: Props) => {
                             />
                         </div>
                         <label className="task">{item.nome}</label>
-                        <button className="remove" onClick={() => deleteTask(item.id)}></button>
+                        <div>
+                            <button className="remove" onClick={() => deleteTask(item.id)}></button>
+                            <button className='pincel' onClick={() => editTask(item.id, item.nome)}>✏️</button>
+                        </div>
+                        
                         <span className='data-task'>{item.data}</span>
                     </li>
                 </ul>

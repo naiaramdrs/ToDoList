@@ -6,7 +6,7 @@ import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
 import Cabecalho from '../../components/cabecalho/Cabecalho';
 import { APIError, fetchAPI } from '../../api/request';
 import { useHistory } from 'react-router-dom';
-import { salvarUsuario } from '../../api/auth';
+import {salvarUsuario } from '../../api/auth';
 import { validaEmail, validaSenha } from "../../util/Validacao";
 import './Login.css';
 
@@ -36,6 +36,11 @@ const Login: React.FC = () => {
         senha: password.value,
       }, 'POST');
       console.log(data);
+
+      if (data === data.usuario){
+        const invalidityEmail = "Email já cadastrado";
+        setEmail({ ...email, invalidity: invalidityEmail });
+      }
 
       salvarUsuario(data.usuario);
 

@@ -10,6 +10,8 @@ import { fetchAPI } from '../../api/request';
 function Menu(props:any) {
 
   const [taskList, setTaskList] = useState<Record<number, Item>>({})
+  const [editTask, setEditTask] = useState("")
+  const [saveTask, setSaveTask] = useState(false)
 
   useEffect(() => {
     fetchAPI('/tarefas', {}, 'GET').then(data => {
@@ -50,6 +52,13 @@ function Menu(props:any) {
     }
   }
 
+  const handleKeyUpSave = (e: KeyboardEvent) => {
+    if (e.code === 'Enter' && inputText != ''){
+      handleSaveTask();
+      setInputText('');
+    }
+  }
+
   const handleTaskChange = (id: number, done: boolean) => {
     taskList[id].done = done;
     
@@ -75,6 +84,23 @@ function Menu(props:any) {
       console.log("tarefa deletada!");
     })
   }
+
+  const handleSaveTask = () => {
+    const tarefa = taskList[editTask as unknown as number]
+    tarefa.nome = inputText;
+    setEditTask(tarefa.id as unknown as string)
+    setInputText(tarefa.nome as string)
+    setSaveTask(false)
+  }
+
+  const handleEditTask = (id: number, nome: String) => {
+    const tarefa = taskList[id]
+    tarefa.nome = nome
+    setInputText(nome as string)
+    setEditTask(tarefa.id as unknown as string)
+    setSaveTask(true)
+  }  
+
 
   return (
    <>
@@ -120,20 +146,37 @@ function Menu(props:any) {
               item={item} 
               onChange={handleTaskChange}
               deleteTask={deleteTask}
+              editTask = {handleEditTask}
               />
             ))}
 
             <br/>
             <footer>
-              <IonInput
-               labelPlacement="floating" 
-               fill="outline" 
-               label='O que você vai fazer?'
-               value={inputText}
-               onIonChange={e => setInputText(e.target.value as string)}
-               onKeyUp={handleKeyUp}
-               color="success"
-               ></IonInput>
+
+              {saveTask ? (
+                <IonInput
+                labelPlacement="floating" 
+                fill="outline" 
+                label='Editando...'
+                value={inputText}
+                onIonChange={e => setInputText(e.target.value as string)}
+                onKeyUp={handleKeyUpSave}
+                color="success"
+                ></IonInput>
+              ) : (
+
+                <IonInput
+                labelPlacement="floating" 
+                fill="outline" 
+                label='O que você vai fazer?'
+                value={inputText}
+                onIonChange={e => setInputText(e.target.value as string)}
+                onKeyUp={handleKeyUp}
+                color="success"
+                ></IonInput>
+              )}
+
+             
             </footer>
           </div>
         </div>
@@ -142,4 +185,5 @@ function Menu(props:any) {
    </>
   );
 }
+
 export default Menu;
