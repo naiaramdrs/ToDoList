@@ -11,14 +11,14 @@ export class APIError {
     }
 };
 
-export async function fetchAPI(endpoint: string, data: object = {}, method: 'GET' | 'POST' = 'POST'): Promise<any> {
+export async function fetchAPI(endpoint: string, data: object = {}, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'POST'): Promise<any> {
     const response = await fetch(Config.API_URL + endpoint, {
         method,
         headers: {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: method === 'POST' ? JSON.stringify(data) : undefined
+        body: (method === 'POST' || method === 'PUT') ? JSON.stringify(data) : undefined
     });
     const json = await response.json();
     if (json.errors !== undefined && json.errors !== null) {

@@ -68,5 +68,7 @@ export default class TarefasController {
     }
 
     await tarefa.delete()
+
+    return {}
   }
 }

@@ -24,7 +24,7 @@ const Tasks = ({ item, onChange, deleteTask }: Props) => {
                             />
                         </div>
                         <label className="task">{item.nome}</label>
-                        <button className="remove" onClick={() => deleteTask(item.id -1)}></button>
+                        <button className="remove" onClick={() => deleteTask(item.id)}></button>
                         <span className='data-task'>{item.data}</span>
                     </li>
                 </ul>
