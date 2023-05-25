@@ -22,6 +22,9 @@ export default class Tarefa extends BaseModel {
   @column()
   public descricao: string
 
+  @column.date({autoCreate: true})
+  public data: DateTime
+
   @column()
   public concluida: boolean
 

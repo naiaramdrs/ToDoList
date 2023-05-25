@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.string('nome_tarefa').notNullable()
       table.string('descricao').nullable()
       table.boolean('tarefa_concluida')
+      table.timestamp('data', { useTz: true })
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
