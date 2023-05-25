@@ -37,7 +37,7 @@ const Cadastro: React.FC = () => {
       }, 'POST');
       console.log(data);
 
-      salvarUsuario(data.usuario);
+      salvarUsuario(data);
 
       history.push('/tarefas');
     } catch (err) {
