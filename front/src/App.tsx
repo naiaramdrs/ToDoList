@@ -24,10 +24,8 @@ import './theme/variables.css';
 import Cadastro from './pages/Cadastro/Cadastro';
 import Inicio from './pages/Inicial/Inicio';
 import Tarefas from './pages/Tarefas/Tarefas';
-import MeuDia from './pages/Tarefas/meuDia/MeuDia';
-import Importante from './pages/Tarefas/importante/Importante';
-import Planejado from './pages/Tarefas/planejado/Planejado';
 import Perfil from './pages/Perfil/Perfil';
+import TarefasGeral from './pages/Tarefas/meuDia/TarefasGeral';
 
 setupIonicReact();
 
@@ -47,14 +45,8 @@ const App: React.FC = () => (
         <Route exact path="/cadastro">
           <Cadastro />
         </Route>
-        <Route exact path="/meudia">
-          <MeuDia />
-        </Route>
-        <Route exact path="/importante">
-          <Importante />
-        </Route>
-        <Route exact path="/planejado">
-          <Planejado />
+        <Route exact path="/minhasTarefas">
+          <TarefasGeral />
         </Route>
         <Route exact path="/perfil">
           <Perfil />

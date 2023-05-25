@@ -15,9 +15,7 @@ function Tarefas() {
       </IonHeader>
       <IonContent className="ion-padding">
         <ul className='list-tarefas'>
-            <li><a href='/meudia'>🌞 Meu Dia</a></li>
-            <li><a href='/importante'>⭐ Importante</a></li>
-            <li><a href='/planejado'>📅 Planejado</a></li>
+            <li><a href='/minhasTarefas'>🌞 Minhas Tarefas</a></li>
         </ul>
       </IonContent>
     </IonMenu>
