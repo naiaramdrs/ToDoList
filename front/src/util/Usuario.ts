@@ -37,6 +37,18 @@ export class Usuario {
         return new Usuario(obj.id, obj.nome, obj.sobrenome, obj.email);
     }
 
+    static async cadastrar(dados: DadosCadastrar): Promise<Usuario> {
+        const usuario = Usuario.fromApiObject(await fetchAPI('/usuario/cadastro', dados, 'POST'));
+        usuario.salvarLocal();
+        return usuario;
+    }
+
+    static async login(email: string, senha: string): Promise<Usuario> {
+        const usuario = Usuario.fromApiObject(await fetchAPI('/usuario/login', { email, senha }, 'POST'));
+        usuario.salvarLocal();
+        return usuario;
+    }
+
     static getLocal(): Usuario | null {
         const value = JSON.parse(localStorage.getItem(CHAVE_LOCAL_USUARIO) ?? "null");
         // FIXME: isso não vai ser uma boa ideia para a data de nascimento! (dataNascimento vs data_nascimento)
@@ -67,15 +79,9 @@ export class Usuario {
         return this;
     }
 
-    static async cadastrar(dados: DadosCadastrar): Promise<Usuario> {
-        const usuario = Usuario.fromApiObject(await fetchAPI('/usuario/cadastro', dados, 'POST'));
-        usuario.salvarLocal();
-        return usuario;
-    }
+    async logout() {
+        localStorage.removeItem(CHAVE_LOCAL_USUARIO);
 
-    static async login(email: string, senha: string): Promise<Usuario> {
-        const usuario = Usuario.fromApiObject(await fetchAPI('/usuario/login', { email, senha }, 'POST'));
-        usuario.salvarLocal();
-        return usuario;
+        await fetchAPI('/usuario/logout', {}, 'POST');
     }
 }

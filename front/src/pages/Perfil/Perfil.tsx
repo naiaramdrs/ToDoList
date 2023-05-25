@@ -4,27 +4,33 @@ import { Usuario } from '../../util/Usuario';
 import Botao from '../../components/botao/Botao';
 import "./Perfil.css"
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 
 function Perfil() {
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
 
   useEffect(() => {
     Usuario.getLocal()?.atualizar().then(usuario => {
       console.log('info', usuario);
       setNome(usuario.nome);
       setSobrenome(usuario.sobrenome);
-      setEmail(usuario.email);
     });
   }, []);
+
+  const history = useHistory();
 
   const submit = () => {
     Usuario.getLocal()?.editar({
       nome, sobrenome
     });
+  };
+
+  const deslogar = () => {
+    Usuario.getLocal()?.logout();
+    // voltar para pagina de login mesmo se o logout deu errado
+    history.push('/login');
   };
 
   return (
@@ -82,18 +88,11 @@ function Perfil() {
             <IonItem>
                 <IonInput label="Sobrenome:" type="text" value={sobrenome} onIonChange={e => setSobrenome(e.target.value as string)}></IonInput>
             </IonItem>
-
-            <IonItem>
-                <IonInput label="Email:" type="email" value={email} disabled></IonInput>
-            </IonItem>
-
-            <IonItem>
-                <IonInput label="Senha:" type="password" value={senha} onIonChange={e => setSenha(e.target.value as string)} disabled></IonInput>
-            </IonItem>
         </IonList>
 
         <div className='botao-perfil'>
-            <Botao color="success" children="Salvar" onClick={submit} />
+            <Botao color="success" onClick={submit}>Salvar</Botao>
+            <Botao color="danger" onClick={deslogar}>Sair</Botao>
         </div>  
       </IonContent>
     </IonPage>
