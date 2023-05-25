@@ -1,53 +1,56 @@
 import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
-import {KeyboardEvent, useState} from 'react';
+import {KeyboardEvent, useEffect, useState} from 'react';
 import Tasks from '../tarefas/Tasks';
-import {Item} from '../../util/Item';
+import { Tarefa } from '../../util/Tarefa';
 import "../../pages/Tarefas/Tarefas.css"
 import "./Menu.css"
 
-function Menu(props:any) {
+function Menu(props: any) {
 
-const [list, setList] = useState<Item[]>([])
+  const [taskList, setTaskList] = useState<Record<number, Tarefa>>({})
 
-const [inputText, setInputText] = useState('')
-const myDate = new Date(Date.now()).toLocaleString().split(',')[0];
+  useEffect(() => {
+    Tarefa.fetchAll().then(tarefas => {
+      const obj = Object.fromEntries(tarefas.map(tarefa => [tarefa.id, tarefa]))
+      setTaskList(obj)
+    })
+  }, [])
 
-const handleAddTask = (taskName: string) => {
-  let newList = [...list];
-  newList.push({
-    id: list.length + 1,
-    nome: taskName,
-    done: false,
-    data: myDate
-  })
-  setList(newList);
-}
+  const [inputText, setInputText] = useState('')
+  const myDate = new Date(Date.now()).toLocaleString().split(',')[0];
 
-const handleKeyUp = (e: KeyboardEvent) => {
-  if (e.code === 'Enter' && inputText != ''){
-    handleAddTask(inputText);
-    setInputText('');
+  const handleAddTask = (taskName: string) => {
+    Tarefa.criar(taskName, 'FALTA A DATA!!!').then(tarefa => {
+      setTaskList({
+        ...taskList,
+        [tarefa.id]: tarefa
+      })
+    });
   }
-}
 
-const handleTaskChange = (id: number, done: boolean) => {
-  let newList = [...list];
-  for(let i in newList) {
-    if(newList[i].id === id) {
-      newList[i].done = done;
+  const handleKeyUp = (e: KeyboardEvent) => {
+    if (e.code === 'Enter' && inputText != ''){
+      handleAddTask(inputText);
+      setInputText('');
     }
   }
-  setList(newList);
-}
 
-const deleteTask = (id: number) => {
-  let newList = [...list];
-  newList.splice(id, 1);
+  const handleTaskChange = (id: number, done: boolean) => {
+    taskList[id].concluida = done;
+    
+    setTaskList({ ...taskList });
 
-  setList(newList)
+    taskList[id].atualizar();
   }
 
+  const deleteTask = (id: number) => {
+    taskList[id].deletar();
+
+    delete taskList[id]
+
+    setTaskList({ ...taskList })
+  }
 
   return (
    <>
@@ -87,10 +90,10 @@ const deleteTask = (id: number) => {
           <div className='todoList'>
             <header className='tituloMenu'>{props.principal}</header>
 
-            {list.map((item, index) => (
-              <Tasks 
-              key= {index} 
-              item = {item} 
+            {Object.values(taskList).map(item => (
+              <Tasks
+              key={item.id}
+              item={item} 
               onChange={handleTaskChange}
               deleteTask={deleteTask}
               />

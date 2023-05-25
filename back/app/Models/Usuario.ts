@@ -7,10 +7,10 @@ export default class Usuario extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @column()
@@ -43,13 +43,4 @@ export default class Usuario extends BaseModel {
     foreignKey: 'idCriador'
   })
   public tarefas: HasMany<typeof Tarefa>
-
-  // transforma o usuario em um objeto para o frontend
-  public paraFront(): object {
-    return {
-      id: this.id,
-      nome: this.nome,
-      sobrenome: this.sobrenome,
-    };
-  }
 }

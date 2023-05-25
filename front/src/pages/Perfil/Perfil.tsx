@@ -15,9 +15,10 @@ function Perfil() {
 
   useEffect(() => {
     fetchAPI('/usuario/info', {}, 'GET').then(data => {
-      setNome(data.usuario.nome);
-      setSobrenome(data.usuario.sobrenome);
-      setEmail(data.usuario.email);
+      console.log('info', data);
+      setNome(data.nome);
+      setSobrenome(data.sobrenome);
+      setEmail(data.email);
       // TODO: data nascimento
     });
   }, []);
@@ -29,7 +30,7 @@ function Perfil() {
     }, 'POST').then(data => {
       console.log(data);
       
-      salvarUsuario(data.usuario);
+      salvarUsuario(data);
     });
   };
 

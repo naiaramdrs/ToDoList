@@ -1,10 +1,10 @@
 import { IonCheckbox } from '@ionic/react';
 import "./Tasks.css"
-import { Item } from '../../util/Item';
+import { Tarefa } from '../../util/Tarefa';
 import { useState } from 'react';
 
 type Props = {
-    item: Item;
+    item: Tarefa;
     onChange: (id: number, done: boolean) => void
     deleteTask: (id: number) => void
 }
@@ -15,16 +15,16 @@ const Tasks = ({ item, onChange, deleteTask }: Props) => {
         <>
             <div className="check-list">
                 <ul className="list">
-                    <li id={item.done ? "marcado" : "nada"}>
+                    <li id={item.concluida ? "marcado" : "nada"}>
                         <div className="check">
                             <IonCheckbox 
-                            checked={item.done}
+                            checked={item.concluida}
                             onIonChange={e => onChange(item.id, e.target.checked)}
                             color = 'success'
                             />
                         </div>
                         <label className="task">{item.nome}</label>
-                        <button className="remove" onClick={() => deleteTask(item.id -1)}></button>
+                        <button className="remove" onClick={() => deleteTask(item.id)}></button>
                         <span className='data-task'>{item.data}</span>
                     </li>
                 </ul>
