@@ -31,7 +31,6 @@ export class Tarefa {
     async atualizar() {
         await fetchAPI(`/tarefas/${this.id}`, {
             nome: this.nome,
-            descricao: '...',
             concluida: this.concluida
         }, 'PUT')
     }
@@ -39,7 +38,6 @@ export class Tarefa {
     static async criar(nome: String, data: String): Promise<Tarefa> {
         const tarefa = this.fromApiObject(await fetchAPI('/tarefas', {
             nome: nome,
-            descricao: '...'
         }, 'POST'));
 
         return tarefa;
