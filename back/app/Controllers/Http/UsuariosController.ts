@@ -90,8 +90,7 @@ export default class UsuariosController {
     }
   }
 
-  public async logout({response, auth}: HttpContextContract){
+  public async logout({auth}: HttpContextContract){
     await auth.use('web').logout()
-    response.redirect('/login')
   }
 }
