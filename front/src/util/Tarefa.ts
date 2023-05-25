@@ -1,4 +1,4 @@
-import { fetchAPI } from "../api/request";
+import { fetchAPI } from "./request";
 
 export class Tarefa {
     public id: number;

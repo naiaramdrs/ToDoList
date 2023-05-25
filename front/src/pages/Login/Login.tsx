@@ -4,7 +4,7 @@ import Botao from '../../components/botao/Botao';
 import Input from '../../components/uteis/Input';
 import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
 import Cabecalho from '../../components/cabecalho/Cabecalho';
-import { APIError, fetchAPI } from '../../api/request';
+import { APIError, fetchAPI } from '../../util/request';
 import { useHistory } from 'react-router-dom';
 import { salvarUsuario } from '../../api/auth';
 import { validaEmail, validaSenha } from "../../util/Validacao";

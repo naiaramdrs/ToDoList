@@ -4,7 +4,7 @@ import Input from '../../components/uteis/Input';
 import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
 import Cabecalho from '../../components/cabecalho/Cabecalho';
 import './Cadastro.css';
-import { APIError, fetchAPI } from '../../api/request';
+import { APIError, fetchAPI } from '../../util/request';
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { salvarUsuario } from '../../api/auth';

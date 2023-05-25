@@ -4,7 +4,7 @@ import { getUsuario, salvarUsuario } from '../../api/auth';
 import Botao from '../../components/botao/Botao';
 import "./Perfil.css"
 import { useEffect, useState } from 'react';
-import { fetchAPI } from '../../api/request';
+import { fetchAPI } from '../../util/request';
 
 
 function Perfil() {
