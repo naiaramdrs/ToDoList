@@ -36,8 +36,8 @@ export class Tarefa {
     }
     
     static async criar(nome: String, data: String): Promise<Tarefa> {
-        const tarefa = this.fromApiObject(await fetchAPI('/tarefas', {
-            nome: nome,
+        const tarefa = Tarefa.fromApiObject(await fetchAPI('/tarefas', {
+            nome,
         }, 'POST'));
 
         return tarefa;

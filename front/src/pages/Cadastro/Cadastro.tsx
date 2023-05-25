@@ -4,10 +4,10 @@ import Input from '../../components/uteis/Input';
 import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
 import Cabecalho from '../../components/cabecalho/Cabecalho';
 import './Cadastro.css';
-import { APIError, fetchAPI } from '../../util/request';
+import { APIError } from '../../util/request';
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import { salvarUsuario } from '../../api/auth';
+import { Usuario } from '../../util/Usuario';
 
 const Cadastro: React.FC = () => {
   function createFormValue() {
@@ -24,27 +24,23 @@ const Cadastro: React.FC = () => {
 
   const history = useHistory();
 
-  const submit = async () => {
-    try {
-      const data = await fetchAPI('/usuario/cadastro', {
-        nome: nome.value,
-        sobrenome: sobrenome.value,
-        email: email.value,
-        genero: genero.value,
-        dataNascimento: nascimento.value,
-        senha: senha.value,
-        senha_confirmation: senhaConf.value
-      }, 'POST');
-      console.log(data);
-
-      salvarUsuario(data);
-
+  const submit = () => {
+    Usuario.cadastrar({
+      nome: nome.value,
+      sobrenome: sobrenome.value,
+      email: email.value,
+      genero: genero.value,
+      dataNascimento: nascimento.value,
+      senha: senha.value,
+      senha_confirmation: senhaConf.value
+    }).then(usuario => {
+      console.log(usuario);
       history.push('/tarefas');
-    } catch (err) {
+    }).catch(err => {
       if (err instanceof APIError) {
         console.log("teve erro:", err.response);
       }
-    }
+    });
   };
 
   return (

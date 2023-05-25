@@ -1,10 +1,9 @@
 import { IonButtons, IonContent, IonHeader, IonInput, IonList, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
-import { getUsuario, salvarUsuario } from '../../api/auth';
+import { Usuario } from '../../util/Usuario';
 import Botao from '../../components/botao/Botao';
 import "./Perfil.css"
 import { useEffect, useState } from 'react';
-import { fetchAPI } from '../../util/request';
 
 
 function Perfil() {
@@ -14,23 +13,17 @@ function Perfil() {
   const [senha, setSenha] = useState("");
 
   useEffect(() => {
-    fetchAPI('/usuario/info', {}, 'GET').then(data => {
-      console.log('info', data);
-      setNome(data.nome);
-      setSobrenome(data.sobrenome);
-      setEmail(data.email);
-      // TODO: data nascimento
+    Usuario.getLocal()?.atualizar().then(usuario => {
+      console.log('info', usuario);
+      setNome(usuario.nome);
+      setSobrenome(usuario.sobrenome);
+      setEmail(usuario.email);
     });
   }, []);
 
   const submit = () => {
-    fetchAPI('/usuario/editar', {
-      nome,
-      sobrenome,
-    }, 'POST').then(data => {
-      console.log(data);
-      
-      salvarUsuario(data);
+    Usuario.getLocal()?.editar({
+      nome, sobrenome
     });
   };
 
@@ -73,7 +66,7 @@ function Perfil() {
                 <IonAvatar slot="start">
                 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                 </IonAvatar>
-                <IonLabel>{ getUsuario()?.nome ?? 'NÃO LOGADO' }</IonLabel>
+                <IonLabel>{ Usuario.getLocal()?.nome ?? 'NÃO LOGADO' }</IonLabel>
             </IonItem>
             <br />
             <div className='botao-perfil'>
