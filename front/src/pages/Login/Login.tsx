@@ -4,9 +4,9 @@ import Botao from '../../components/botao/Botao';
 import Input from '../../components/uteis/Input';
 import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
 import Cabecalho from '../../components/cabecalho/Cabecalho';
-import { APIError, fetchAPI } from '../../api/request';
+import { APIError } from '../../util/request';
 import { useHistory } from 'react-router-dom';
-import {salvarUsuario } from '../../api/auth';
+import { Usuario } from '../../util/Usuario';
 import { validaEmail, validaSenha } from "../../util/Validacao";
 import './Login.css';
 
@@ -28,28 +28,15 @@ const Login: React.FC = () => {
     return !invalidityEmail && !invalidityPassword ? true : false;
   };
 
-  const submit = async () => {
+  const submit = () => {
    if (validateForm()){
-    try {
-      const data = await fetchAPI('/usuario/login', {
-        email: email.value,
-        senha: password.value,
-      }, 'POST');
-      console.log(data);
-
-      if (data === data.usuario){
-        const invalidityEmail = "Email já cadastrado";
-        setEmail({ ...email, invalidity: invalidityEmail });
-      }
-
-      salvarUsuario(data.usuario);
-
+    Usuario.login(email.value, password.value).then(_ => {
       history.push('/tarefas');
-    } catch (err) {
+    }).catch(err => {
       if (err instanceof APIError) {
         console.log("teve erro:", err.response);
       }
-    }
+    })
    }
   };
   

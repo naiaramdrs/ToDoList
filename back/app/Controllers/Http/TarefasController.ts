@@ -11,13 +11,12 @@ export default class TarefasController {
   }
 
   public async store({ request, auth }: HttpContextContract) {
-    const dados = request.only(['nome', 'descricao'])
+    const dados = request.only(['nome'])
 
     await auth.use('web').authenticate()
 
     const tarefa = await auth.user!.related('tarefas').create({
       nome: dados.nome,
-      descricao: dados.descricao,
       concluida: false,
     })
 
@@ -37,7 +36,7 @@ export default class TarefasController {
   }
 
   public async update({ request, auth }: HttpContextContract) {
-    const body = request.only(['nome', 'descricao', 'concluida'])
+    const body = request.only(['nome', 'concluida'])
 
     await auth.use('web').authenticate()
 
@@ -50,7 +49,6 @@ export default class TarefasController {
 
     await tarefa.merge({
       nome: body.nome,
-      descricao: body.descricao,
       concluida: body.concluida
     }).save()
 

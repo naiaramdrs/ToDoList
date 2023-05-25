@@ -2,46 +2,32 @@ import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, Io
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
 import {KeyboardEvent, useEffect, useState} from 'react';
 import Tasks from '../tarefas/Tasks';
-import { Item } from '../../util/Item';
+import { Tarefa } from '../../util/Tarefa';
 import "../../pages/Tarefas/Tarefas.css"
 import "./Menu.css"
-import { fetchAPI } from '../../api/request';
 
-function Menu(props:any) {
+function Menu(props: any) {
 
-  const [taskList, setTaskList] = useState<Record<number, Item>>({})
+  const [taskList, setTaskList] = useState<Record<number, Tarefa>>({})
   const [editTask, setEditTask] = useState("")
   const [saveTask, setSaveTask] = useState(false)
 
   useEffect(() => {
-    fetchAPI('/tarefas', {}, 'GET').then(data => {
-      setTaskList(Object.fromEntries(data.map((x: any) => {
-        return [
-          x.id, {
-            id: x.id,
-            nome: x.nome,
-            done: x.concluida,
-            data: '1999-01-01'
-          }
-        ]
-      })))
-    });
+    Tarefa.fetchAll().then(tarefas => {
+      const obj = Object.fromEntries(tarefas.map(tarefa => [tarefa.id, tarefa]))
+      setTaskList(obj)
+    })
   }, [])
 
   const [inputText, setInputText] = useState('')
   const myDate = new Date(Date.now()).toLocaleString().split(',')[0];
 
   const handleAddTask = (taskName: string) => {
-    fetchAPI('/tarefas', {
-      nome: taskName,
-      descricao: 'nada..'
-    }, 'POST').then(data => {
-      setTaskList({ ...taskList, [data.id]: {
-        id: data.id,
-        nome: data.nome,
-        done: data.concluida,
-        data: '1999-01-01'
-      }});
+    Tarefa.criar(taskName, 'FALTA A DATA!!!').then(tarefa => {
+      setTaskList({
+        ...taskList,
+        [tarefa.id]: tarefa
+      })
     });
   }
 
@@ -60,29 +46,19 @@ function Menu(props:any) {
   }
 
   const handleTaskChange = (id: number, done: boolean) => {
-    taskList[id].done = done;
+    taskList[id].concluida = done;
     
     setTaskList({ ...taskList });
 
-    const tarefa = taskList[id];
-    fetchAPI(`/tarefas/${id}`, {
-      nome: tarefa.nome,
-      descricao: "... nada ainda",
-      concluida: done
-    }, 'PUT').then(_ => {
-      console.log("tarefa atualizada!");
-    })
-
+    taskList[id].atualizar();
   }
 
   const deleteTask = (id: number) => {
+    taskList[id].deletar();
+
     delete taskList[id]
 
     setTaskList({ ...taskList })
-
-    fetchAPI(`/tarefas/${id}`, {}, 'DELETE').then(_ => {
-      console.log("tarefa deletada!");
-    })
   }
 
   const handleSaveTask = () => {

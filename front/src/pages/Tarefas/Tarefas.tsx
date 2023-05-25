@@ -1,6 +1,6 @@
 import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
-import { getUsuario } from '../../api/auth';
+import { Usuario } from '../../util/Usuario';
 import "./Tarefas.css"
 
 
@@ -46,7 +46,7 @@ function Tarefas() {
                 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
               </IonAvatar>
             </div>
-            <header>Bem-vindo { getUsuario()?.nome ?? 'NÃO LOGADO' }</header>
+            <header>Bem-vindo { Usuario.getLocal()?.nome ?? 'NÃO LOGADO' }</header>
             <p className='frase'>Não esqueça que deixar suas tarefas organizadas é o mais importante.</p>
           </div>
         </div>

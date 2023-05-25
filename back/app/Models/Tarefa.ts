@@ -13,14 +13,14 @@ export default class Tarefa extends BaseModel {
   @belongsTo(() => Usuario, {
     localKey: 'idCriador',
   })
-  
+
   public criador: BelongsTo<typeof Usuario>
 
   @column()
   public nome: string
 
-  @column()
-  public descricao: string
+  @column.date({autoCreate: true})
+  public data: DateTime
 
   @column()
   public concluida: boolean

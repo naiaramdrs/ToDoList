@@ -1,49 +1,37 @@
 import { IonButtons, IonContent, IonHeader, IonInput, IonList, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
-import { getUsuario, salvarUsuario } from '../../api/auth';
+import { Usuario } from '../../util/Usuario';
 import Botao from '../../components/botao/Botao';
 import "./Perfil.css"
 import { useEffect, useState } from 'react';
-import { fetchAPI } from '../../api/request';
+import { useHistory } from 'react-router-dom';
 
 
 function Perfil() {
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [nascimento, setNascimento] = useState("");
 
   useEffect(() => {
-    fetchAPI('/usuario/info', {}, 'GET').then(data => {
-      setNome(data.usuario.nome);
-      setSobrenome(data.usuario.sobrenome);
-      setEmail(data.usuario.email);
-      setNascimento(data.usuario.nascimento)
+    Usuario.getLocal()?.atualizar().then(usuario => {
+      console.log('info', usuario);
+      setNome(usuario.nome);
+      setSobrenome(usuario.sobrenome);
     });
   }, []);
 
+  const history = useHistory();
+
   const submit = () => {
-    fetchAPI('/usuario/editar', {
-      nome,
-      sobrenome,
-    }, 'POST').then(data => {
-      console.log(data);
-      
-      salvarUsuario(data.usuario);
+    Usuario.getLocal()?.editar({
+      nome, sobrenome
     });
   };
 
-  const [image, setImage] = useState('')
-  const [avatar] = useState("https://ionicframework.com/docs/img/demos/avatar.svg");
-  const [status, setStatus] = useState({
-    type: '',
-    mensagem: ''
-  })
-
-  const uploadImage = async (e:any) => {
-  
-  }
+  const deslogar = () => {
+    Usuario.getLocal()?.logout();
+    // voltar para pagina de login mesmo se o logout deu errado
+    history.push('/login');
+  };
 
   return (
    <>
@@ -84,7 +72,7 @@ function Perfil() {
                 <IonAvatar slot="start">
                 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                 </IonAvatar>
-                <IonLabel>{ getUsuario()?.nome ?? 'NÃO LOGADO' }</IonLabel>
+                <IonLabel>{ Usuario.getLocal()?.nome ?? 'NÃO LOGADO' }</IonLabel>
             </IonItem>
             <br />
             <div className='botao-perfil'>
@@ -100,22 +88,11 @@ function Perfil() {
             <IonItem>
                 <IonInput label="Sobrenome:" type="text" value={sobrenome} onIonChange={e => setSobrenome(e.target.value as string)}></IonInput>
             </IonItem>
-
-            <IonItem>
-                <IonInput label="Data de nascimento:" type="text" value={nascimento} onIonChange={e => setNascimento(e.target.value as string)}></IonInput>
-            </IonItem>
-
-            <IonItem>
-                <IonInput label="Email:" type="email" value={email} disabled></IonInput>
-            </IonItem>
-
-            <IonItem>
-                <IonInput label="Senha:" type="password" value={senha} onIonChange={e => setSenha(e.target.value as string)} disabled></IonInput>
-            </IonItem>
         </IonList>
 
         <div className='botao-perfil'>
-            <Botao color="success" children="Salvar" onClick={submit} />
+            <Botao color="success" onClick={submit}>Salvar</Botao>
+            <Botao color="danger" onClick={deslogar}>Sair</Botao>
         </div>  
       </IonContent>
     </IonPage>

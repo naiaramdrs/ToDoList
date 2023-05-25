@@ -32,7 +32,7 @@ const editarSchema = schema.create({
 })
 
 export default class UsuariosController {
-  public async cadastro({ request }: HttpContextContract) {
+  public async cadastro({ request, auth }: HttpContextContract) {
     const valores = await request.validate({ schema: cadastroSchema })
 
     // FIXME: sql solta uma exceção quando tem dois emails iguais
@@ -45,9 +45,9 @@ export default class UsuariosController {
       dataNascimento: DateTime.fromISO(valores.dataNascimento),
     })
 
-    return {
-      usuario: user.paraFront()
-    }
+    await auth.use('web').login(user)
+
+    return user
   }
 
   public async login({ auth, request }: HttpContextContract) {
@@ -55,24 +55,13 @@ export default class UsuariosController {
 
     await auth.use('web').attempt(valores.email, valores.senha)
 
-    return {
-      usuario: auth.user!.paraFront()
-    }
+    return auth.user!
   }
 
   public async info({ auth }: HttpContextContract) {
     await auth.use('web').authenticate();
 
-    const user = auth.user!;
-
-    return {
-      usuario: {
-        nome: user.nome,
-        sobrenome: user.sobrenome,
-        email: user.email,
-        dataNascimento: user.dataNascimento,
-      }
-    }
+    return auth.user!
   }
 
   public async editar({ auth, request }: HttpContextContract) {
@@ -85,8 +74,12 @@ export default class UsuariosController {
       sobrenome: valores.sobrenome
     }).save();
 
-    return {
-      usuario: auth.user!.paraFront()
-    }
+    return auth.user!
+  }
+
+  public async logout({auth}: HttpContextContract){
+    await auth.use('web').logout()
+
+    return {}
   }
 }
