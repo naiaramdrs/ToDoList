@@ -12,13 +12,14 @@ function Perfil() {
   const [sobrenome, setSobrenome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const [nascimento, setNascimento] = useState("");
 
   useEffect(() => {
     fetchAPI('/usuario/info', {}, 'GET').then(data => {
       setNome(data.usuario.nome);
       setSobrenome(data.usuario.sobrenome);
       setEmail(data.usuario.email);
-      // TODO: data nascimento
+      setNascimento(data.usuario.nascimento)
     });
   }, []);
 
@@ -32,6 +33,17 @@ function Perfil() {
       salvarUsuario(data.usuario);
     });
   };
+
+  const [image, setImage] = useState('')
+  const [avatar] = useState("https://ionicframework.com/docs/img/demos/avatar.svg");
+  const [status, setStatus] = useState({
+    type: '',
+    mensagem: ''
+  })
+
+  const uploadImage = async (e:any) => {
+  
+  }
 
   return (
    <>
@@ -77,7 +89,7 @@ function Perfil() {
             <br />
             <div className='botao-perfil'>
                 <Botao color="success" children="selecionar imagem" />
-            </div>     
+            </div>      
         </div>
 
         <IonList>
@@ -87,6 +99,10 @@ function Perfil() {
 
             <IonItem>
                 <IonInput label="Sobrenome:" type="text" value={sobrenome} onIonChange={e => setSobrenome(e.target.value as string)}></IonInput>
+            </IonItem>
+
+            <IonItem>
+                <IonInput label="Data de nascimento:" type="text" value={nascimento} onIonChange={e => setNascimento(e.target.value as string)}></IonInput>
             </IonItem>
 
             <IonItem>
