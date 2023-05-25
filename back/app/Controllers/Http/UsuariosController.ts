@@ -89,4 +89,9 @@ export default class UsuariosController {
       usuario: auth.user!.paraFront()
     }
   }
+
+  public async logout({response, auth}: HttpContextContract){
+    await auth.use('web').logout()
+    response.redirect('/login')
+  }
 }
