@@ -8,7 +8,7 @@ const Content = (props:any) => {
                     <div className='box-conteudo'>
                         <div className='box-texto'>
                             <h2>{props.h2}</h2>
-                            <button><a href='/cadastro'>Inscreva-se</a></button>
+                            <a href='/cadastro'><button>Inscreva-se</button></a>
                         </div>
                     </div>
                     <div className='box-inicio'>

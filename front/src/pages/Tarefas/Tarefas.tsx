@@ -42,6 +42,7 @@ function Tarefas() {
             </div>
             <header>Bem-vindo { Usuario.getLocal()?.nome ?? 'NÃO LOGADO' }</header>
             <p className='frase'>Não esqueça que deixar suas tarefas organizadas é o mais importante.</p>
+            <p className='frase'><a href="/minhasTarefas"><button>Ver tarefas</button></a></p>
           </div>
         </div>
       </IonContent>

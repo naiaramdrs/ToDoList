@@ -67,3 +67,14 @@
     text-decoration: none;
     color: #9C93B5;
 }
+
+button {
+    background-color: #9C93B5;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #bdb7cc;
+}
