@@ -103,7 +103,7 @@ function Menu(props: any) {
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
             <IonItem>
-              <Avatar label = "Perfil" linkPerfil="/perfil" imagemAvatar={Usuario.getLocal()?.fotoPerfil ?? "https://ionicframework.com/docs/img/demos/avatar.svg" }/>
+              <Avatar />
             </IonItem>
           </div>
         </IonToolbar>

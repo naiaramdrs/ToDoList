@@ -29,8 +29,7 @@ function Tarefas() {
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
             <IonItem>
-              <Avatar label = "Perfil" linkPerfil="/perfil" imagemAvatar={ Usuario.getLocal()?.fotoPerfil ?? "https://ionicframework.com/docs/img/demos/avatar.svg"}/>
-                <IonLabel><a href='/perfil'>Perfil</a></IonLabel>
+              <Avatar />
             </IonItem>
           </div>
         </IonToolbar>
@@ -39,7 +38,7 @@ function Tarefas() {
         <div className='container-todo' id="teste">
           <div className='todoList'>
             <div className='avatar'>
-              <Avatar label = "Perfil" linkPerfil="/perfil" imagemAvatar={ Usuario.getLocal()?.fotoPerfil ?? "https://ionicframework.com/docs/img/demos/avatar.svg"}/>
+              <Avatar />
             </div>
             <header>Bem-vindo { Usuario.getLocal()?.nome ?? 'NÃO LOGADO' }</header>
             <p className='frase'>Não esqueça que deixar suas tarefas organizadas é o mais importante.</p>

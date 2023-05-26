@@ -1,4 +1,5 @@
 import { fetchAPI } from "./request";
+import Config from '../config';
 
 const CHAVE_LOCAL_USUARIO = 'usuario';
 
@@ -24,17 +25,19 @@ export class Usuario {
     public nome: string
     public sobrenome: string
     public email: string
+    public fotoPerfil: string
     // tem mais coisa mas por enquanto o front não precisa
 
-    constructor(id: number, nome: string, sobrenome: string, email: string) {
+    constructor(id: number, dados: { nome: string, sobrenome: string, email: string, fotoPerfil: string }) {
         this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
+        this.nome = dados.nome;
+        this.sobrenome = dados.sobrenome;
+        this.email = dados.email;
+        this.fotoPerfil = dados.fotoPerfil;
     }
 
     static fromApiObject(obj: any): Usuario {
-        return new Usuario(obj.id, obj.nome, obj.sobrenome, obj.email);
+        return new Usuario(obj.id, { ...obj, fotoPerfil: Config.API_URL + obj.foto_perfil.url.replace(/^\/api/, '') });
     }
 
     static async cadastrar(dados: DadosCadastrar): Promise<Usuario> {
@@ -51,8 +54,8 @@ export class Usuario {
 
     static getLocal(): Usuario | null {
         const value = JSON.parse(localStorage.getItem(CHAVE_LOCAL_USUARIO) ?? "null");
-        // FIXME: isso não vai ser uma boa ideia para a data de nascimento! (dataNascimento vs data_nascimento)
-        return value ? Usuario.fromApiObject(value) : null;
+        if (!value) return null;
+        return new Usuario(value.id, value);
     }
 
     salvarLocal() {
@@ -83,5 +86,13 @@ export class Usuario {
         localStorage.removeItem(CHAVE_LOCAL_USUARIO);
 
         await fetchAPI('/usuario/logout', {}, 'POST');
+    }
+
+    async uploadFoto(foto: File) {
+        const dados = await fetchAPI('/usuario/upload_foto', { foto }, 'FORM');
+        
+        this.fotoPerfil = Config.API_URL + dados.url.replace(/^\/api/, '')
+
+        this.salvarLocal()
     }
 }

@@ -10,30 +10,24 @@ import Avatar from './Avatar';
 
 function Perfil() {
 
-  const [image, setImage] = useState<string | null>(null);
-  const temImagem = image !== null;
+  const [image, setImage] = useState<File | null>(null);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files?.[0];
-    if (selectedImage) {
-      const imageUrl = URL.createObjectURL(selectedImage);
-      setImage(imageUrl);
-    }
+    setImage(selectedImage ?? null);
   };
 
   const handleSaveImage = () => {
-    if (temImagem) {
-      // aqui faz alguma coisa com a imagem
+    if (image) {
+      Usuario.getLocal()!.uploadFoto(image);
     }
   };
-
 
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
 
   useEffect(() => {
     Usuario.getLocal()?.atualizar().then(usuario => {
-      console.log('info', usuario);
       setNome(usuario.nome);
       setSobrenome(usuario.sobrenome);
     });
@@ -76,7 +70,7 @@ function Perfil() {
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
             <IonItem>
-              <Avatar label = "Perfil" linkPerfil="/perfil" imagemAvatar={ temImagem ? image : "https://ionicframework.com/docs/img/demos/avatar.svg"}/>
+              <Avatar />
             </IonItem>
           </div>
         </IonToolbar>
@@ -84,7 +78,7 @@ function Perfil() {
       <IonContent className="ion-padding">
         <div>
             <IonItem>
-                <Avatar label = {Usuario.getLocal()?.nome ?? 'NÃO LOGADO'} imagemAvatar={ temImagem ? image : "https://ionicframework.com/docs/img/demos/avatar.svg"}/>
+                <Avatar label={Usuario.getLocal()?.nome ?? 'NÃO LOGADO'} url={image ? URL.createObjectURL(image) : null} />
             </IonItem>
             <br />
             <div className='input-file'>
@@ -109,7 +103,7 @@ function Perfil() {
         <div className='botao-perfil'>
             <Botao color="success" onClick={submit}>Salvar</Botao>
             <Botao color="danger" onClick={deslogar}>Sair</Botao>
-        </div>  
+        </div>
       </IonContent>
     </IonPage>
    </>
