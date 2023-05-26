@@ -1,3 +1,4 @@
+import { Attachment } from '@ioc:Adonis/Addons/AttachmentLite'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Usuario from 'App/Models/Usuario'
@@ -69,7 +70,7 @@ export default class UsuariosController {
 
     await auth.use('web').authenticate()
 
-    auth.user!.merge({
+    await auth.user!.merge({
       nome: valores.nome,
       sobrenome: valores.sobrenome
     }).save();
@@ -77,9 +78,34 @@ export default class UsuariosController {
     return auth.user!
   }
 
-  public async logout({auth}: HttpContextContract){
+  public async logout({ auth }: HttpContextContract) {
     await auth.use('web').logout()
 
     return {}
+  }
+
+  public async uploadFoto({ auth, request }: HttpContextContract) {
+    await auth.use('web').authenticate()
+
+    const foto = request.file('foto', {
+      size: '2mb',
+      extnames: ['jpg', 'jpeg', 'png']
+    })
+
+    if (!foto || !foto.isValid) {
+      return {
+        errors: ['IMG_INVALIDA']
+      }
+    }
+
+    auth.user!.fotoPerfil = Attachment.fromFile(foto)
+
+    // necessario para que o Attachment não de erro dps,
+    // mas tambem para salvar os dados no banco de dados
+    await auth.user!.save()
+
+    return {
+      url: await auth.user!.fotoPerfil!.getSignedUrl()
+    }
   }
 }

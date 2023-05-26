@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, HasMany, beforeSave, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Hash from '@ioc:Adonis/Core/Hash'
 import Tarefa from './Tarefa'
+import { AttachmentContract, attachment } from '@ioc:Adonis/Addons/AttachmentLite'
 
 export default class Usuario extends BaseModel {
   @column({ isPrimary: true })
@@ -43,4 +44,7 @@ export default class Usuario extends BaseModel {
     foreignKey: 'idCriador'
   })
   public tarefas: HasMany<typeof Tarefa>
+
+  @attachment({ preComputeUrl: true })
+  public fotoPerfil: AttachmentContract | null
 }
