@@ -5,9 +5,30 @@ import Botao from '../../components/botao/Botao';
 import "./Perfil.css"
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Avatar from './Avatar';
 
 
 function Perfil() {
+
+  const [image, setImage] = useState<string | null>(null);
+  const [endImage, setEndImage] = useState("https://ionicframework.com/docs/img/demos/avatar.svg");
+  const temImagem = image !== null;
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedImage = event.target.files?.[0];
+    if (selectedImage) {
+      const imageUrl = URL.createObjectURL(selectedImage);
+      setImage(imageUrl);
+    }
+  };
+
+  const handleSaveImage = () => {
+    if (temImagem) {
+      // aqui faz alguma coisa com a imagem
+    }
+  };
+
+
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
 
@@ -56,10 +77,7 @@ function Perfil() {
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
             <IonItem>
-              <IonAvatar slot="start">
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                </IonAvatar>
-                <IonLabel><a href='/perfil'>Perfil</a></IonLabel>
+              <Avatar label = "Perfil" linkPerfil="/perfil" imagemAvatar={ temImagem ? image : "https://ionicframework.com/docs/img/demos/avatar.svg"}/>
             </IonItem>
           </div>
         </IonToolbar>
@@ -67,15 +85,16 @@ function Perfil() {
       <IonContent className="ion-padding">
         <div>
             <IonItem>
-                <IonAvatar slot="start">
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                </IonAvatar>
-                <IonLabel>{ Usuario.getLocal()?.nome ?? 'NÃO LOGADO' }</IonLabel>
+                <Avatar label = {Usuario.getLocal()?.nome ?? 'NÃO LOGADO'} imagemAvatar={ temImagem ? image : "https://ionicframework.com/docs/img/demos/avatar.svg"}/>
             </IonItem>
             <br />
-            <div className='botao-perfil'>
-                <Botao color="success" children="selecionar imagem" />
+            <div className='input-file'>
+                <input type='file'  onChange={handleImageChange} />
             </div>      
+            <div className='botao-perfil'>
+              <Botao color="success" onClick={handleSaveImage}>Salvar Imagem</Botao>
+            </div>
+            
         </div>
 
         <IonList>

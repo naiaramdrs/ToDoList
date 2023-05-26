@@ -5,6 +5,7 @@ import Tasks from '../tarefas/Tasks';
 import { Tarefa } from '../../util/Tarefa';
 import "../../pages/Tarefas/Tarefas.css"
 import "./Menu.css"
+import Avatar from '../../pages/Perfil/Avatar';
 
 function Menu(props: any) {
 
@@ -101,10 +102,7 @@ function Menu(props: any) {
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
             <IonItem>
-              <IonAvatar slot="start">
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                </IonAvatar>
-                <IonLabel><a href='/perfil'>Perfil</a></IonLabel>
+              <Avatar label = "Perfil" linkPerfil="/perfil"/>
             </IonItem>
           </div>
         </IonToolbar>

@@ -3,3 +3,8 @@
     display: flex;
     justify-content: center;
 }
+
+.input-file {
+    margin: 15px;
+    display: block;
+}
