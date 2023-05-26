@@ -12,7 +12,6 @@ const Inicio: React.FC = () => {
             <Cabecalho title = "ToDolist" args = "Entre" link = "/login" />
             <IonContent fullscreen>
                 <Titulo />
-                <a href="/tarefas">teste</a>
                <Content h2 = "Inscreva-se e melhore o seu jeito de organizar" src = "./terefasok.png"/>
 
                 <div className='container-cards'>

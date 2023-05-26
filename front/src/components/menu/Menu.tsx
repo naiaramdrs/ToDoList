@@ -6,6 +6,7 @@ import { Tarefa } from '../../util/Tarefa';
 import "../../pages/Tarefas/Tarefas.css"
 import "./Menu.css"
 import Avatar from '../../pages/Perfil/Avatar';
+import { Usuario } from '../../util/Usuario';
 
 function Menu(props: any) {
 
@@ -102,7 +103,7 @@ function Menu(props: any) {
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
             <IonItem>
-              <Avatar label = "Perfil" linkPerfil="/perfil"/>
+              <Avatar label = "Perfil" linkPerfil="/perfil" imagemAvatar={Usuario.getLocal()?.fotoPerfil ?? "https://ionicframework.com/docs/img/demos/avatar.svg" }/>
             </IonItem>
           </div>
         </IonToolbar>

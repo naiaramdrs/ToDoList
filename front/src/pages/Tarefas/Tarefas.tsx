@@ -2,6 +2,7 @@ import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, Ion
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
 import { Usuario } from '../../util/Usuario';
 import "./Tarefas.css"
+import Avatar from '../Perfil/Avatar';
 
 
 function Tarefas() {
@@ -28,9 +29,7 @@ function Tarefas() {
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
             <IonItem>
-              <IonAvatar slot="start">
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                </IonAvatar>
+              <Avatar label = "Perfil" linkPerfil="/perfil" imagemAvatar={ Usuario.getLocal()?.fotoPerfil ?? "https://ionicframework.com/docs/img/demos/avatar.svg"}/>
                 <IonLabel><a href='/perfil'>Perfil</a></IonLabel>
             </IonItem>
           </div>
@@ -40,9 +39,7 @@ function Tarefas() {
         <div className='container-todo' id="teste">
           <div className='todoList'>
             <div className='avatar'>
-              <IonAvatar slot="start">
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-              </IonAvatar>
+              <Avatar label = "Perfil" linkPerfil="/perfil" imagemAvatar={ Usuario.getLocal()?.fotoPerfil ?? "https://ionicframework.com/docs/img/demos/avatar.svg"}/>
             </div>
             <header>Bem-vindo { Usuario.getLocal()?.nome ?? 'NÃO LOGADO' }</header>
             <p className='frase'>Não esqueça que deixar suas tarefas organizadas é o mais importante.</p>

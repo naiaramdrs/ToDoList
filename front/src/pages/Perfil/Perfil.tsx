@@ -11,7 +11,6 @@ import Avatar from './Avatar';
 function Perfil() {
 
   const [image, setImage] = useState<string | null>(null);
-  const [endImage, setEndImage] = useState("https://ionicframework.com/docs/img/demos/avatar.svg");
   const temImagem = image !== null;
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
