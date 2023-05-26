@@ -11,7 +11,7 @@ function Avatar(props: any) {
             src={props.url ?? Usuario.getLocal()?.fotoPerfil ?? "https://ionicframework.com/docs/img/demos/avatar.svg"}
           />
       </IonAvatar>
-      <IonLabel><a href='/perfil'>{props.label ?? 'Perfil'}</a></IonLabel>
+      <IonLabel><a href='/perfil'>{props.label}</a></IonLabel>
     </>
   );
 }

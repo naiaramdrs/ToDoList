@@ -103,7 +103,7 @@ function Menu(props: any) {
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
             <IonItem>
-              <Avatar />
+              <Avatar label = "Perfil"/>
             </IonItem>
           </div>
         </IonToolbar>

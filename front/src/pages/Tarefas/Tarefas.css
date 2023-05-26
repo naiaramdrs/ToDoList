@@ -78,3 +78,14 @@ button {
 button:hover {
     background-color: #bdb7cc;
 }
+
+.box-botao-Tarefas{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box-botao-Tarefas a{
+    color: white;
+    font-weight: bold;
+}

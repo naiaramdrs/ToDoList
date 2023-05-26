@@ -1,8 +1,9 @@
-import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
 import { Usuario } from '../../util/Usuario';
 import "./Tarefas.css"
 import Avatar from '../Perfil/Avatar';
+import Botao from '../../components/botao/Botao';
 
 
 function Tarefas() {
@@ -29,7 +30,7 @@ function Tarefas() {
           <div className='tolbar-task'>
             <IonTitle><a href='/tarefas'>ToDolist</a></IonTitle>
             <IonItem>
-              <Avatar />
+              <Avatar label="Perfil"/>
             </IonItem>
           </div>
         </IonToolbar>
@@ -41,8 +42,10 @@ function Tarefas() {
               <Avatar />
             </div>
             <header>Bem-vindo { Usuario.getLocal()?.nome ?? 'NÃO LOGADO' }</header>
-            <p className='frase'>Não esqueça que deixar suas tarefas organizadas é o mais importante.</p>
-            <p className='frase'><a href="/minhasTarefas"><button>Ver tarefas</button></a></p>
+            <div className='box-botao-Tarefas'>
+              <p className='frase'>Não esqueça que deixar suas tarefas organizadas é o mais importante.</p>
+              <Botao color="success"><a href="/minhasTarefas">Ver tarefas</a></Botao>
+            </div> 
           </div>
         </div>
       </IonContent>
