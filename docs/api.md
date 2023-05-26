@@ -95,7 +95,7 @@ Essa rota faz logout do usuário autenticado
 > `/api/usuario/upload_foto`
 
 ### Request Body
-Os dados devem ser enviados no formato `application/form-data`.
+Os dados devem ser enviados no formato `multipart/form-data`.
 
 | chave | tipo | extra |
 |-|-|-|
