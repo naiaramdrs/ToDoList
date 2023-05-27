@@ -25,7 +25,7 @@ export class Usuario {
     public nome: string
     public sobrenome: string
     public email: string
-    public fotoPerfil: string
+    public fotoPerfil: string | null
     // tem mais coisa mas por enquanto o front não precisa
 
     constructor(id: number, dados: { nome: string, sobrenome: string, email: string, fotoPerfil: string }) {
@@ -37,7 +37,7 @@ export class Usuario {
     }
 
     static fromApiObject(obj: any): Usuario {
-        return new Usuario(obj.id, { ...obj, fotoPerfil: Config.API_URL + obj.foto_perfil.url.replace(/^\/api/, '') });
+        return new Usuario(obj.id, { ...obj, fotoPerfil: obj.foto_perfil ? Config.API_URL + obj.foto_perfil.url.replace(/^\/api/, '') : null });
     }
 
     static async cadastrar(dados: DadosCadastrar): Promise<Usuario> {
