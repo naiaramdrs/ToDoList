@@ -11,22 +11,15 @@ import "../../pages/Tarefas/Tarefas.css"
 
 function Menu(props: any) {
 
-  const [selectedDate, setSelectedDate] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = (event: CustomEvent) => {
-    const seleteValue = event.detail.value;
-    setSelectedDate(seleteValue);
+    setSelectedDate(new Date(event.detail.value));
   };
-
-  const ButtonClick = () => {
-    setData(selectedDate);
-  };
-
 
   const [taskList, setTaskList] = useState<Record<number, Tarefa>>({})
   const [editingTaskId, setEditingTaskId] = useState(-1)
   const [inputText, setInputText] = useState('')
-  const [data, setData] = useState(new Date().toLocaleDateString('pt-BR', {timeZone: 'UTC'}))
   
   useEffect(() => {
     Tarefa.fetchAll().then(tarefas => {
@@ -37,7 +30,7 @@ function Menu(props: any) {
 
   // adiciona uma tarefa na lista
   const handleAddTask = (taskName: string) => {
-    Tarefa.criar(taskName, 'FALTA A DATA!!!').then(tarefa => {
+    Tarefa.criar(taskName, selectedDate).then(tarefa => {
       setTaskList({
         ...taskList,
         [tarefa.id]: tarefa
@@ -61,18 +54,13 @@ function Menu(props: any) {
     }
   }
 
-  // ainda não está funcionando
-  const onClickSaveDate = () => {
-      data;
-  }
-
   // marca a tarefa como concluida ou não concluida
   const handleTaskChange = (id: number, done: boolean) => {
     taskList[id].concluida = done
+    taskList[id].data = selectedDate
     
     setTaskList({ ...taskList })
-    taskList[id].data = data
-    setData(data)
+
     taskList[id].atualizar()
   }
 
@@ -95,9 +83,9 @@ function Menu(props: any) {
   const handleSaveTask = () => {
     const tarefa = taskList[editingTaskId]
     tarefa.nome = inputText
+    tarefa.data = selectedDate
 
     setTaskList({ ...taskList })
-    setData(tarefa.data)
 
     tarefa.atualizar()
 
@@ -107,8 +95,8 @@ function Menu(props: any) {
   // edita a tarefa
   const handleEditTask = (tarefa: Tarefa) => {
     setInputText(tarefa.nome)
-    setData(tarefa.data)
     setEditingTaskId(tarefa.id)
+    setSelectedDate(tarefa.data)
   }  
 
 
@@ -152,7 +140,6 @@ function Menu(props: any) {
               onChange={handleTaskChange}
               deleteTask={deleteTask}
               editTask={handleEditTask}
-              datas={data}
               />
             ))}
 
@@ -187,10 +174,10 @@ function Menu(props: any) {
                 <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
 
                 <IonModal keepContentsMounted={true}>
-                  <IonDatetime id="datetime" onIonChange={handleDateChange}></IonDatetime>
+                  <IonDatetime
+                  id="datetime" onIonChange={handleDateChange} value={selectedDate.toISOString()}
+                  ></IonDatetime>
                 </IonModal>
-                <br/>
-                <IonButton onClick={ButtonClick} color="success">Obter Data</IonButton>
               </div>
 
              

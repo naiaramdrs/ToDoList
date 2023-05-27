@@ -7,10 +7,9 @@ type Props = {
     onChange: (id: number, done: boolean) => void
     deleteTask: (id: number) => void
     editTask: (item: Tarefa) => void
-    datas: string
 }
 
-const Tasks = ({ item, onChange, deleteTask, editTask, datas }: Props) => {
+const Tasks = ({ item, onChange, deleteTask, editTask }: Props) => {
 
     return (
         <>
@@ -32,7 +31,7 @@ const Tasks = ({ item, onChange, deleteTask, editTask, datas }: Props) => {
                             <button className='pincel' onClick={() => editTask(item)}>✏️</button>
                         </div>
                         
-                        <span className='data-task'>{datas}</span>
+                        <span className='data-task'>{item.dataFormatada()}</span>
                     </li>
                 </ul>
             </div>
