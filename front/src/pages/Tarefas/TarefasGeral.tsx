@@ -1,4 +1,4 @@
-import { KeyboardEvent, useEffect, useState } from 'react';
+import { KeyboardEvent, useEffect, useMemo, useState } from 'react';
 import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonItem } from '@ionic/react';
 import { IonDatetime, IonDatetimeButton, IonModal } from '@ionic/react';
@@ -19,6 +19,7 @@ function TarefasGeral() {
 
   const [taskList, setTaskList] = useState<Record<number, Tarefa>>({})
   const [editingTaskId, setEditingTaskId] = useState(-1)
+  const isEditing = useMemo(() => editingTaskId !== -1, [editingTaskId])
   const [inputText, setInputText] = useState('')
   
   useEffect(() => {
@@ -29,8 +30,8 @@ function TarefasGeral() {
   }, [])
 
   // adiciona uma tarefa na lista
-  const handleAddTask = (taskName: string) => {
-    Tarefa.criar(taskName, selectedDate).then(tarefa => {
+  const handleAddTask = () => {
+    Tarefa.criar(inputText, selectedDate).then(tarefa => {
       setTaskList({
         ...taskList,
         [tarefa.id]: tarefa
@@ -38,21 +39,18 @@ function TarefasGeral() {
     });
   }
 
-  // se o usuario apertar enter, adiciona a tarefa
+  // se o usuario apertar enter, adiciona ou salva a tarefa
   const handleKeyUp = (e: KeyboardEvent) => {
-    if (e.code === 'Enter' && inputText != ''){
-      handleAddTask(inputText)
+    if (!inputText) return;
+    if (e.code === 'Enter') {
+      if (isEditing)
+        handleSaveTask()
+      else
+        handleAddTask()
       setInputText('')
     }
   }
 
-  // se o usuario apertar enter, salva a tarefa
-  const handleKeyUpSave = (e: KeyboardEvent) => {
-    if (e.code === 'Enter' && inputText != ''){
-      handleSaveTask()
-      setInputText('')
-    }
-  }
 
   // marca a tarefa como concluida ou não concluida
   const handleTaskChange = (id: number, done: boolean) => {
@@ -97,8 +95,16 @@ function TarefasGeral() {
     setInputText(tarefa.nome)
     setEditingTaskId(tarefa.id)
     setSelectedDate(tarefa.data)
-  }  
+  }
 
+  const handleEnviarButton = () => {
+    if (!inputText) return;
+    if (isEditing)
+      handleSaveTask()
+    else
+      handleAddTask()
+    setInputText('')
+  }
 
   return (
    <>
@@ -146,31 +152,22 @@ function TarefasGeral() {
             <br/>
             <footer>
 
-              {editingTaskId !== -1 ? (
+              <div style={{display: 'flex'}}>
                 <IonInput
-                labelPlacement="floating" 
-                fill="outline" 
-                label='Editando...'
-                value={inputText}
-                onIonChange={e => setInputText(e.target.value as string)}
-                onKeyUp={handleKeyUpSave}
-                color="success"
+                  labelPlacement="floating" 
+                  fill="outline" 
+                  label={isEditing ? 'Editando...' : 'O que você vai fazer?'}
+                  value={inputText}
+                  onIonChange={e => setInputText(e.target.value as string)}
+                  onKeyUp={handleKeyUp}
+                  color="success"
+                  slot="end"
                 ></IonInput>
-              ) : (
-
-                <IonInput
-                labelPlacement="floating" 
-                fill="outline" 
-                label='O que você vai fazer?'
-                value={inputText}
-                onIonChange={e => setInputText(e.target.value as string)}
-                onKeyUp={handleKeyUp}
-                color="success"
-                ></IonInput>
-              )}
+                <button onClick={handleEnviarButton}>Enviar</button>
+              </div>
 
               <div className='data-tarefas'>
-                <h2>Escolha uma data para sua tarefa</h2>
+                <h2>Escolha uma data para esta tarefa</h2>
                 <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
 
                 <IonModal keepContentsMounted={true}>

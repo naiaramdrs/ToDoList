@@ -18,3 +18,14 @@ header.tituloMenu {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
+button {
+    background-color: #9C93B5;
+    border-radius: 10px;
+    margin: 5px;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #bdb7cc;
+}
