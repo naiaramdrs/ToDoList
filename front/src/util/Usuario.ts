@@ -18,7 +18,6 @@ interface DadosEditar {
     sobrenome?: string;
     genero?: string;
     dataNascimento?: string;
-    idade?: number;
 }
 
 export class Usuario {
