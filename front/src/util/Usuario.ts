@@ -10,7 +10,6 @@ interface DadosCadastrar {
     genero: string;
     dataNascimento: string;
     senha: string;
-    senha_confirmation: string;
 }
 
 interface DadosEditar {

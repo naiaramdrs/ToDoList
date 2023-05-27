@@ -8,6 +8,7 @@ import { APIError } from '../../util/request';
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { Usuario } from '../../util/Usuario';
+import { validaEmail, validaSenha } from '../../util/Validacao';
 
 const Cadastro: React.FC = () => {
   function createFormValue() {
@@ -24,7 +25,42 @@ const Cadastro: React.FC = () => {
 
   const history = useHistory();
 
+  const validarForm = () => {
+    let invalid = false;
+
+    const msgEmail = validaEmail(email.value);
+    const msgSenha = validaSenha(senha.value);
+
+    if (msgEmail || msgSenha)
+      invalid = true;
+
+    setEmail({ ...email, invalidity: msgEmail });
+    setSenha({ ...senha, invalidity: msgSenha });
+
+    if (senha.value !== senhaConf.value) {
+      invalid = true;
+      setSenha({ ...senha, invalidity: 'Senhas não estão iguais' })
+      setSenhaConf({ ...senhaConf, invalidity: 'Senhas não estão iguais' })
+    }
+
+    function invalidIfEmpty(value: any, setValue: (a: any) => void) {
+      if (!value.value) {
+        invalid = true;
+        setValue({ ...value, invalidity: value.invalidity = 'Não pode ser vazio' });
+      }
+    }
+
+    invalidIfEmpty(nome, setNome);
+    invalidIfEmpty(sobrenome, setSobrenome);
+    invalidIfEmpty(genero, setGenero);
+    invalidIfEmpty(nascimento, setNascimento);
+
+    return !invalid;
+  };
+
   const submit = () => {
+    if (!validarForm()) return;
+
     Usuario.cadastrar({
       nome: nome.value,
       sobrenome: sobrenome.value,
@@ -32,13 +68,15 @@ const Cadastro: React.FC = () => {
       genero: genero.value,
       dataNascimento: nascimento.value,
       senha: senha.value,
-      senha_confirmation: senhaConf.value
     }).then(usuario => {
       console.log(usuario);
       history.push('/tarefas');
     }).catch(err => {
+      console.log("teve erro:", err);
       if (err instanceof APIError) {
-        console.log("teve erro:", err.response);
+        if (err.response.code === 'E_EMAIL_EXISTE') {
+          setEmail({ ...email, invalidity: 'Email já cadastrado' });
+        }
       }
     });
   };

@@ -9,8 +9,8 @@
   
     if (password.length < 6)
       saida = "Sua senha deve ter pelo menos 6 caracteres";
-    else if (password.length > 15)
-      saida = "Sua senha deve ter no máximo 15 caracteres";
+    else if (password.length > 25)
+      saida = "Sua senha deve ter no máximo 25 caracteres";
 
     return saida;
   };

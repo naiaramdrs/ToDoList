@@ -1,7 +1,8 @@
 import Config from '../config';
 
 export interface APIResponseError {
-    errors: object[]
+    errors?: object[]
+    code?: string
 };
 
 export class APIError {
@@ -34,7 +35,7 @@ export async function fetchAPI(endpoint: string, data: any = {}, method: 'GET' |
         body
     });
     const json = await response.json();
-    if (json.errors !== undefined && json.errors !== null) {
+    if (response.status !== 200) {
         throw new APIError(json as APIResponseError);
     }
     return json;

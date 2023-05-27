@@ -1,3 +1,4 @@
+import { Exception } from '@adonisjs/core/build/standalone'
 import { Attachment } from '@ioc:Adonis/Addons/AttachmentLite'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
@@ -11,8 +12,8 @@ const cadastroSchema = schema.create({
     rules.email()
   ]),
   senha: schema.string({}, [
-    rules.confirmed(),
-    rules.minLength(6)
+    rules.minLength(6),
+    rules.maxLength(25),
   ]),
   genero: schema.string(),
   dataNascimento: schema.string({}, [
@@ -40,19 +41,26 @@ export default class UsuariosController {
   public async cadastro({ request, auth }: HttpContextContract) {
     const valores = await request.validate({ schema: cadastroSchema })
 
-    // FIXME: sql solta uma exceção quando tem dois emails iguais
-    const user = await Usuario.create({
-      nome: valores.nome,
-      sobrenome: valores.sobrenome,
-      email: valores.email,
-      password: valores.senha,
-      genero: valores.genero,
-      dataNascimento: DateTime.fromISO(valores.dataNascimento),
-    })
+    try {
+      const user = await Usuario.create({
+        nome: valores.nome,
+        sobrenome: valores.sobrenome,
+        email: valores.email,
+        password: valores.senha,
+        genero: valores.genero,
+        dataNascimento: DateTime.fromISO(valores.dataNascimento),
+      })
 
-    await auth.use('web').login(user)
+      await auth.use('web').login(user)
 
-    return user
+      return user
+    } catch (err) {
+      if (err.code === 'SQLITE_CONSTRAINT') {
+        throw new Exception('Email já existe!', 400, 'E_EMAIL_EXISTE');
+      } else {
+        throw err;
+      }
+    }
   }
 
   public async login({ auth, request }: HttpContextContract) {
