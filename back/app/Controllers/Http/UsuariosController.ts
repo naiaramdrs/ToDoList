@@ -107,9 +107,7 @@ export default class UsuariosController {
     })
 
     if (!foto || !foto.isValid) {
-      return {
-        errors: ['IMG_INVALIDA']
-      }
+      throw new Exception('Imagem invalida!', 400, 'E_IMG_INVALIDA');
     }
 
     auth.user!.fotoPerfil = Attachment.fromFile(foto)
@@ -119,7 +117,7 @@ export default class UsuariosController {
     await auth.user!.save()
 
     return {
-      url: await auth.user!.fotoPerfil!.getSignedUrl()
+      url: await auth.user!.computedFotoPerfilUrl
     }
   }
 }

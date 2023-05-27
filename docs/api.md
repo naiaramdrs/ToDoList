@@ -12,7 +12,7 @@ Utilizado em várias rotas, isso é uma representação em JSON do usuário.
 |email|string|
 |genero|string|
 |data_nascimento|string| No formato `YYYY-MM-DD`, onde Y é ano, M é mês e D é dia. |
-|foto_perfil|string| URL da foto de perfil. Pode ser `null` (ERRADO NO MOMENTO!!) |
+|foto_perfil|string| URL da foto de perfil relativo a url da api. Pode ser `null` |
 
 ---
 
@@ -104,10 +104,10 @@ Os dados devem ser enviados no formato `multipart/form-data`.
 |foto|File| A foto dever ser em formato jpg ou png, e ser menor do que 2mb. |
 
 ### Response
-Retorna a url da foto, num formato que eu ainda n quero finalizado
+Retorna a url da foto, relativo a url da api.
 ```json
 {
-    "url": "/api/uploads/algumacoisa.png?token=asoidjsaoisjads"
+    "url": "/uploads/algumacoisa.png?signature=asoidjsaoisjads"
 }
 ```
 

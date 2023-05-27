@@ -68,11 +68,9 @@ const Cadastro: React.FC = () => {
       genero: genero.value,
       dataNascimento: nascimento.value,
       senha: senha.value,
-    }).then(usuario => {
-      console.log(usuario);
+    }).then(_ => {
       history.push('/tarefas');
     }).catch(err => {
-      console.log("teve erro:", err);
       if (err instanceof APIError) {
         if (err.response.code === 'E_EMAIL_EXISTE') {
           setEmail({ ...email, invalidity: 'Email já cadastrado' });

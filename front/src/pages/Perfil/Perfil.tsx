@@ -20,6 +20,7 @@ function Perfil() {
   const handleSaveImage = () => {
     if (image) {
       Usuario.getLocal()!.uploadFoto(image);
+      // TODO: mostrar uma msg de erro quando invalida
     }
   };
 

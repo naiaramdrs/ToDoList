@@ -27,7 +27,6 @@ export class Usuario {
     public fotoPerfil: string | null
     public genero: string
     public dataNascimento: string
-    // tem mais coisa mas por enquanto o front não precisa
 
     constructor(id: number, dados: { nome: string, sobrenome: string, email: string, fotoPerfil: string, genero: string, dataNascimento: string }) {
         this.id = id;
@@ -40,7 +39,11 @@ export class Usuario {
     }
 
     static fromApiObject(obj: any): Usuario {
-        return new Usuario(obj.id, { ...obj, dataNascimento: obj.data_nascimento, fotoPerfil: obj.foto_perfil ? Config.API_URL + obj.foto_perfil.url.replace(/^\/api/, '') : null });
+        return new Usuario(obj.id, {
+            ...obj,
+            dataNascimento: obj.data_nascimento,
+            fotoPerfil: obj.foto_perfil ? Config.API_URL + obj.foto_perfil : null
+        });
     }
 
     static async cadastrar(dados: DadosCadastrar): Promise<Usuario> {
@@ -94,7 +97,7 @@ export class Usuario {
     async uploadFoto(foto: File) {
         const dados = await fetchAPI('/usuario/upload_foto', { foto }, 'FORM');
         
-        this.fotoPerfil = Config.API_URL + dados.url.replace(/^\/api/, '')
+        this.fotoPerfil = Config.API_URL + dados.url
 
         this.salvarLocal()
     }

@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, HasMany, beforeSave, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasMany, beforeSave, column, computed, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Hash from '@ioc:Adonis/Core/Hash'
 import Tarefa from './Tarefa'
 import { AttachmentContract, attachment } from '@ioc:Adonis/Addons/AttachmentLite'
@@ -39,12 +39,18 @@ export default class Usuario extends BaseModel {
     }
   }
 
-  //fiz essa mudança para permitir que o usuário tenha tarefas
   @hasMany(() => Tarefa, {
     foreignKey: 'idCriador'
   })
   public tarefas: HasMany<typeof Tarefa>
 
-  @attachment({ preComputeUrl: true })
+  @attachment({ preComputeUrl: true, serializeAs: null })
   public fotoPerfil: AttachmentContract | null
+
+  // a biblioteca de attachment não respeita o metodo serialize, então utilizamos
+  // uma propriedade computada como alternativa.
+  @computed({ serializeAs: 'foto_perfil' })
+  public get computedFotoPerfilUrl() {
+    return this.fotoPerfil ? this.fotoPerfil.url.replace(/^\/api/, '') : this.fotoPerfil;
+  }
 }

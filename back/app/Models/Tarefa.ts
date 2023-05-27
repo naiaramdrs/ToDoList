@@ -13,7 +13,6 @@ export default class Tarefa extends BaseModel {
   @belongsTo(() => Usuario, {
     localKey: 'idCriador',
   })
-
   public criador: BelongsTo<typeof Usuario>
 
   @column()

@@ -24,7 +24,6 @@ export async function fetchAPI(endpoint: string, data: any = {}, method: 'GET' |
         method = 'POST';
         body = new FormData();
         for (const key in data) {
-            console.log('setting', key, data[key]);
             body.append(key, data[key] as string | Blob);
         }
     }
