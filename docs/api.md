@@ -12,7 +12,7 @@ Utilizado em várias rotas, isso é uma representação em JSON do usuário.
 |email|string|
 |genero|string|
 |data_nascimento|string| No formato `YYYY-MM-DD`, onde Y é ano, M é mês e D é dia. |
-|foto_perfil|string| URL da foto de perfil. Pode ser `null` |
+|foto_perfil|string| URL da foto de perfil. Pode ser `null` (ERRADO NO MOMENTO!!) |
 
 ---
 
@@ -76,8 +76,10 @@ Os dados devem ser enviados no formato `application/json`.
 
 | chave | tipo | extra |
 |-|-|-|
-|nome|string|
-|sobrenome|string|
+|nome|string?| Opcional.
+|sobrenome|string?| Opcional.
+|dataNascimento|string?| Opcional. No formato `YYYY-MM-DD`
+|genero|string?| Opcional.
 
 ### Response
 [Objeto do usuário](#objeto-do-usuário)
