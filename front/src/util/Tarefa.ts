@@ -2,11 +2,11 @@ import { fetchAPI } from "./request";
 
 export class Tarefa {
     public id: number;
-    public nome: String;
+    public nome: string;
     public concluida: boolean;
-    public data: String;
+    public data: string;
 
-    constructor(id: number, nome: String, data: String) {
+    constructor(id: number, nome: string, data: string) {
         this.id = id;
         this.nome = nome;
         this.concluida = false;
@@ -35,7 +35,7 @@ export class Tarefa {
         }, 'PUT')
     }
     
-    static async criar(nome: String, data: String): Promise<Tarefa> {
+    static async criar(nome: string, data: string): Promise<Tarefa> {
         const tarefa = Tarefa.fromApiObject(await fetchAPI('/tarefas', {
             nome,
         }, 'POST'));

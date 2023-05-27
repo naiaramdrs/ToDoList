@@ -11,8 +11,7 @@ import { Usuario } from '../../util/Usuario';
 function Menu(props: any) {
 
   const [taskList, setTaskList] = useState<Record<number, Tarefa>>({})
-  const [editTask, setEditTask] = useState("")
-  const [saveTask, setSaveTask] = useState(false)
+  const [editingTaskId, setEditingTaskId] = useState(-1)
 
   useEffect(() => {
     Tarefa.fetchAll().then(tarefas => {
@@ -58,25 +57,32 @@ function Menu(props: any) {
   const deleteTask = (id: number) => {
     taskList[id].deletar();
 
+    // se o usuario está editando a tarefa no momento tem que resetar o input
+    if (id == editingTaskId) {
+      setEditingTaskId(-1);
+      setInputText('');
+    }
+
     delete taskList[id]
 
     setTaskList({ ...taskList })
   }
 
   const handleSaveTask = () => {
-    const tarefa = taskList[editTask as unknown as number]
+    const tarefa = taskList[editingTaskId]
     tarefa.nome = inputText;
-    setEditTask(tarefa.id as unknown as string)
-    setInputText(tarefa.nome as string)
-    setSaveTask(false)
+
+    setTaskList({ ...taskList });
+
+    tarefa.atualizar();
+
+    setEditingTaskId(-1)
   }
 
-  const handleEditTask = (id: number, nome: String) => {
-    const tarefa = taskList[id]
-    tarefa.nome = nome
-    setInputText(nome as string)
-    setEditTask(tarefa.id as unknown as string)
-    setSaveTask(true)
+  const handleEditTask = (tarefa: Tarefa) => {
+    setInputText(tarefa.nome)
+
+    setEditingTaskId(tarefa.id)
   }  
 
 
@@ -119,14 +125,14 @@ function Menu(props: any) {
               item={item} 
               onChange={handleTaskChange}
               deleteTask={deleteTask}
-              editTask = {handleEditTask}
+              editTask={handleEditTask}
               />
             ))}
 
             <br/>
             <footer>
 
-              {saveTask ? (
+              {editingTaskId !== -1 ? (
                 <IonInput
                 labelPlacement="floating" 
                 fill="outline" 

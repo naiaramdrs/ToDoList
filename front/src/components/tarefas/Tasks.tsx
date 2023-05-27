@@ -6,7 +6,7 @@ type Props = {
     item: Tarefa;
     onChange: (id: number, done: boolean) => void
     deleteTask: (id: number) => void
-    editTask: (id:number, nome: String) => void
+    editTask: (item: Tarefa) => void
 }
 
 const Tasks = ({ item, onChange, deleteTask, editTask }: Props) => {
@@ -26,7 +26,7 @@ const Tasks = ({ item, onChange, deleteTask, editTask }: Props) => {
                         <label className="task">{item.nome}</label>
                         <div>
                             <button className="remove" onClick={() => deleteTask(item.id)}></button>
-                            <button className='pincel' onClick={() => editTask(item.id, item.nome)}>✏️</button>
+                            <button className='pincel' onClick={() => editTask(item)}>✏️</button>
                         </div>
                         
                         <span className='data-task'>{item.data}</span>
