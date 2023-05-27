@@ -1,7 +1,6 @@
 import { IonCheckbox } from '@ionic/react';
 import "./Tasks.css"
 import { Tarefa } from '../../util/Tarefa';
-import { useState } from 'react';
 
 type Props = {
     item: Tarefa;

@@ -25,11 +25,18 @@ function Perfil() {
 
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
+  const [genero, setGenero] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [idade, setIdade] = useState(Number);
+  let mudouData = false;
 
   useEffect(() => {
     Usuario.getLocal()?.atualizar().then(usuario => {
       setNome(usuario.nome);
       setSobrenome(usuario.sobrenome);
+      setGenero(usuario.genero);
+      setDataNascimento(usuario.dataNascimento);
+      setIdade(usuario.idade);
     });
   }, []);
 
@@ -37,9 +44,18 @@ function Perfil() {
 
   const submit = () => {
     Usuario.getLocal()?.editar({
-      nome, sobrenome
+      nome, sobrenome, genero, dataNascimento
     });
+
+    mudouData = true
+    if (mudouData) {
+      const data = dataNascimento ? new Date(dataNascimento) : new Date();
+      const hoje = new Date();
+      const idade = hoje.getFullYear() - data.getFullYear();
+      setIdade(idade);
+    }
   };
+
 
   const deslogar = () => {
     Usuario.getLocal()?.logout();
@@ -97,6 +113,15 @@ function Perfil() {
 
             <IonItem>
                 <IonInput label="Sobrenome:" type="text" value={sobrenome} onIonChange={e => setSobrenome(e.target.value as string)}></IonInput>
+            </IonItem>
+            <IonItem>
+                <IonInput label="Gênero:" type="text" value={genero} onIonChange={e => setGenero(e.target.value as string)}></IonInput>
+            </IonItem>
+            <IonItem>
+                <IonInput label="Data de Nascimento:" type="date" value={dataNascimento} onIonChange={e => setDataNascimento(e.target.value as string)}></IonInput>
+            </IonItem>
+            <IonItem>
+                <IonInput label="Idade:" type="text" value={idade}></IonInput>
             </IonItem>
         </IonList>
 

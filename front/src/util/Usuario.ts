@@ -18,6 +18,7 @@ interface DadosEditar {
     sobrenome?: string;
     genero?: string;
     dataNascimento?: string;
+    idade?: number;
 }
 
 export class Usuario {
@@ -26,14 +27,20 @@ export class Usuario {
     public sobrenome: string
     public email: string
     public fotoPerfil: string | null
+    public genero: string
+    public dataNascimento: string
+    public idade: number
     // tem mais coisa mas por enquanto o front não precisa
 
-    constructor(id: number, dados: { nome: string, sobrenome: string, email: string, fotoPerfil: string }) {
+    constructor(id: number, dados: { nome: string, sobrenome: string, email: string, fotoPerfil: string, genero: string, dataNascimento: string }) {
         this.id = id;
         this.nome = dados.nome;
         this.sobrenome = dados.sobrenome;
         this.email = dados.email;
         this.fotoPerfil = dados.fotoPerfil;
+        this.genero = dados.genero;
+        this.dataNascimento = dados.dataNascimento;
+        this.idade = new Date().getFullYear() - new Date(this.dataNascimento).getFullYear();
     }
 
     static fromApiObject(obj: any): Usuario {
