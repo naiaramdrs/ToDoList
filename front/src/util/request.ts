@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router';
 import Config from '../config';
 
 export interface APIResponseError {
@@ -35,6 +36,9 @@ export async function fetchAPI(endpoint: string, data: any = {}, method: 'GET' |
     });
     const json = await response.json();
     if (response.status !== 200) {
+        if (json?.errors?.[0]?.message?.startsWith('E_INVALID_AUTH_SESSION')) {
+            window.location.href = '/login';
+        }
         throw new APIError(json as APIResponseError);
     }
     return json;

@@ -59,9 +59,17 @@ export class Usuario {
     }
 
     static getLocal(): Usuario | null {
-        const value = JSON.parse(localStorage.getItem(CHAVE_LOCAL_USUARIO) ?? "null");
-        if (!value) return null;
-        return new Usuario(value.id, value);
+        try {
+            const value = JSON.parse(localStorage.getItem(CHAVE_LOCAL_USUARIO) ?? "null");
+            if (!value) return null;
+            return new Usuario(value.id, value);
+        } catch {
+            // se houve problema então considera o usuario invalido
+            // e o remove da storage
+            localStorage.removeItem(CHAVE_LOCAL_USUARIO);
+            fetchAPI('/usuario/logout', {}, 'POST');
+            return null;
+        }
     }
 
     salvarLocal() {

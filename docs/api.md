@@ -187,7 +187,5 @@ Os dados devem ser enviados no formato `application/json`.
 |concluida|boolean?| Opcional.
 |data|string?| Opcional. No formato `YYYY-MM-DD`
 
-*Sim ta faltando a data, shhh*
-
 ### Response
 [Objeto de tarefa](#objeto-de-tarefa)
