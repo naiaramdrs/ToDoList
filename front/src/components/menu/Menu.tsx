@@ -1,5 +1,5 @@
 import {KeyboardEvent, useEffect, useState} from 'react';
-import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonItem } from '@ionic/react';
 import { IonDatetime, IonDatetimeButton, IonModal } from '@ionic/react';
 import { Tarefa } from '../../util/Tarefa';
@@ -11,11 +11,23 @@ import "../../pages/Tarefas/Tarefas.css"
 
 function Menu(props: any) {
 
+  const [selectedDate, setSelectedDate] = useState<string>('');
+
+  const handleDateChange = (event: CustomEvent) => {
+    const seleteValue = event.detail.value;
+    setSelectedDate(seleteValue);
+  };
+
+  const ButtonClick = () => {
+    setData(selectedDate);
+  };
+
+
   const [taskList, setTaskList] = useState<Record<number, Tarefa>>({})
   const [editingTaskId, setEditingTaskId] = useState(-1)
   const [inputText, setInputText] = useState('')
-  const [data, setData] = useState(new Date().toISOString())
-
+  const [data, setData] = useState(new Date().toLocaleDateString('pt-BR', {timeZone: 'UTC'}))
+  
   useEffect(() => {
     Tarefa.fetchAll().then(tarefas => {
       const obj = Object.fromEntries(tarefas.map(tarefa => [tarefa.id, tarefa]))
@@ -140,6 +152,7 @@ function Menu(props: any) {
               onChange={handleTaskChange}
               deleteTask={deleteTask}
               editTask={handleEditTask}
+              datas={data}
               />
             ))}
 
@@ -171,11 +184,13 @@ function Menu(props: any) {
 
               <div className='data-tarefas'>
                 <h2>Escolha uma data para sua tarefa</h2>
-                <IonDatetimeButton datetime="datetime" onClick={onClickSaveDate}></IonDatetimeButton>
+                <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
 
                 <IonModal keepContentsMounted={true}>
-                  <IonDatetime id="datetime" onClick={onClickSaveDate}></IonDatetime>
+                  <IonDatetime id="datetime" onIonChange={handleDateChange}></IonDatetime>
                 </IonModal>
+                <br/>
+                <IonButton onClick={ButtonClick} color="success">Obter Data</IonButton>
               </div>
 
              
