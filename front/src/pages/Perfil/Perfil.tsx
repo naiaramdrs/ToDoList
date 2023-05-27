@@ -10,27 +10,29 @@ import Avatar from './Avatar';
 
 function Perfil() {
 
-  const [image, setImage] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null>(null)
 
+  // seleciona a imagem
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedImage = event.target.files?.[0];
-    setImage(selectedImage ?? null);
+    const selectedImage = event.target.files?.[0]
+    setImage(selectedImage ?? null)
   };
 
+  // salva a imagem
   const handleSaveImage = () => {
     if (image) {
       Usuario.getLocal()!.uploadFoto(image);
       // TODO: mostrar uma msg de erro quando invalida
     }
-  };
+  }
 
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
   const [genero, setGenero] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
   const [idade, setIdade] = useState(0);
-
   let pegouDados = false;
+  
   useEffect(() => {
     if (pegouDados) return;
     pegouDados = true;

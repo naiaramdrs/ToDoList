@@ -1,6 +1,6 @@
 import { IonAvatar, IonLabel } from "@ionic/react";
-import "./Avatar.css"
 import { Usuario } from "../../util/Usuario";
+import "./Avatar.css"
 
 function Avatar(props: any) {
   return (

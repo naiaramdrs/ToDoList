@@ -1,14 +1,14 @@
+import { useState } from 'react';
 import {IonContent, IonPage} from '@ionic/react';
+import { validaEmail, validaSenha } from '../../util/Validacao';
+import { useHistory } from "react-router-dom";
+import { APIError } from '../../util/request';
+import { Usuario } from '../../util/Usuario';
+import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
 import Botao from '../../components/botao/Botao';
 import Input from '../../components/uteis/Input';
-import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
 import Cabecalho from '../../components/cabecalho/Cabecalho';
 import './Cadastro.css';
-import { APIError } from '../../util/request';
-import { useState } from 'react';
-import { useHistory } from "react-router-dom";
-import { Usuario } from '../../util/Usuario';
-import { validaEmail, validaSenha } from '../../util/Validacao';
 
 const Cadastro: React.FC = () => {
   function createFormValue() {
@@ -25,6 +25,7 @@ const Cadastro: React.FC = () => {
 
   const history = useHistory();
 
+  // Valida o formulário e retorna true se for válido
   const validarForm = () => {
     let invalid = false;
 
@@ -57,6 +58,7 @@ const Cadastro: React.FC = () => {
     return !invalid;
   };
 
+  // Envia o formulário para o servidor
   const submit = () => {
     if (!validarForm()) return;
 

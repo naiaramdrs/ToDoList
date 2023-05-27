@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { IonContent, IonPage} from '@ionic/react';
-import Botao from '../../components/botao/Botao';
-import Input from '../../components/uteis/Input';
-import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
-import Cabecalho from '../../components/cabecalho/Cabecalho';
+import { validaEmail, validaSenha } from "../../util/Validacao";
 import { APIError } from '../../util/request';
 import { useHistory } from 'react-router-dom';
 import { Usuario } from '../../util/Usuario';
-import { validaEmail, validaSenha } from "../../util/Validacao";
+import MensagemInvalida from '../../components/mensagem/MensagemInvalida';
+import Cabecalho from '../../components/cabecalho/Cabecalho';
+import Botao from '../../components/botao/Botao';
+import Input from '../../components/uteis/Input';
 import './Login.css';
 
 
@@ -18,6 +18,7 @@ const Login: React.FC = () => {
 
   const history = useHistory();
 
+  // Valida o formulário e retorna true se for válido
   const validateForm = () => {
     const invalidityEmail = validaEmail(email.value);
     const invalidityPassword = validaSenha(password.value);
@@ -28,10 +29,11 @@ const Login: React.FC = () => {
     return !invalidityEmail && !invalidityPassword;
   };
 
+  // Faz o login
   const submit = () => {
    if (validateForm()){
     Usuario.login(email.value, password.value).then(_ => {
-      history.push('/tarefas');
+      history.push('/tarefas')
     }).catch(err => {
       if (err instanceof APIError) {
         if (err.response.errors) {

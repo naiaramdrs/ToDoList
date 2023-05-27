@@ -1,9 +1,9 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonItem } from '@ionic/react';
 import { Usuario } from '../../util/Usuario';
-import "./Tarefas.css"
 import Avatar from '../Perfil/Avatar';
 import Botao from '../../components/botao/Botao';
+import "./Tarefas.css"
 
 
 function Tarefas() {
