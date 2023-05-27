@@ -1,17 +1,20 @@
-import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
 import {KeyboardEvent, useEffect, useState} from 'react';
-import Tasks from '../tarefas/Tasks';
+import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonItem } from '@ionic/react';
+import { IonDatetime, IonDatetimeButton, IonModal } from '@ionic/react';
 import { Tarefa } from '../../util/Tarefa';
-import "../../pages/Tarefas/Tarefas.css"
-import "./Menu.css"
+import Tasks from '../tarefas/Tasks';
 import Avatar from '../../pages/Perfil/Avatar';
-import { Usuario } from '../../util/Usuario';
+import "./Menu.css"
+import "../../pages/Tarefas/Tarefas.css"
+
 
 function Menu(props: any) {
 
   const [taskList, setTaskList] = useState<Record<number, Tarefa>>({})
   const [editingTaskId, setEditingTaskId] = useState(-1)
+  const [inputText, setInputText] = useState('')
+  const [data, setData] = useState(new Date().toISOString())
 
   useEffect(() => {
     Tarefa.fetchAll().then(tarefas => {
@@ -20,9 +23,7 @@ function Menu(props: any) {
     })
   }, [])
 
-  const [inputText, setInputText] = useState('')
-  const myDate = new Date(Date.now()).toLocaleString().split(',')[0];
-
+  // adiciona uma tarefa na lista
   const handleAddTask = (taskName: string) => {
     Tarefa.criar(taskName, 'FALTA A DATA!!!').then(tarefa => {
       setTaskList({
@@ -32,35 +33,45 @@ function Menu(props: any) {
     });
   }
 
+  // se o usuario apertar enter, adiciona a tarefa
   const handleKeyUp = (e: KeyboardEvent) => {
     if (e.code === 'Enter' && inputText != ''){
-      handleAddTask(inputText);
-      setInputText('');
+      handleAddTask(inputText)
+      setInputText('')
     }
   }
 
+  // se o usuario apertar enter, salva a tarefa
   const handleKeyUpSave = (e: KeyboardEvent) => {
     if (e.code === 'Enter' && inputText != ''){
-      handleSaveTask();
-      setInputText('');
+      handleSaveTask()
+      setInputText('')
     }
   }
 
-  const handleTaskChange = (id: number, done: boolean) => {
-    taskList[id].concluida = done;
-    
-    setTaskList({ ...taskList });
-
-    taskList[id].atualizar();
+  // ainda não está funcionando
+  const onClickSaveDate = () => {
+      data;
   }
 
+  // marca a tarefa como concluida ou não concluida
+  const handleTaskChange = (id: number, done: boolean) => {
+    taskList[id].concluida = done
+    
+    setTaskList({ ...taskList })
+    taskList[id].data = data
+    setData(data)
+    taskList[id].atualizar()
+  }
+
+  // deleta a tarefa da lista
   const deleteTask = (id: number) => {
-    taskList[id].deletar();
+    taskList[id].deletar()
 
     // se o usuario está editando a tarefa no momento tem que resetar o input
     if (id == editingTaskId) {
-      setEditingTaskId(-1);
-      setInputText('');
+      setEditingTaskId(-1)
+      setInputText('')
     }
 
     delete taskList[id]
@@ -68,20 +79,23 @@ function Menu(props: any) {
     setTaskList({ ...taskList })
   }
 
+  // salva a tarefa editada
   const handleSaveTask = () => {
     const tarefa = taskList[editingTaskId]
-    tarefa.nome = inputText;
+    tarefa.nome = inputText
 
-    setTaskList({ ...taskList });
+    setTaskList({ ...taskList })
+    setData(tarefa.data)
 
-    tarefa.atualizar();
+    tarefa.atualizar()
 
     setEditingTaskId(-1)
   }
 
+  // edita a tarefa
   const handleEditTask = (tarefa: Tarefa) => {
     setInputText(tarefa.nome)
-
+    setData(tarefa.data)
     setEditingTaskId(tarefa.id)
   }  
 
@@ -154,6 +168,15 @@ function Menu(props: any) {
                 color="success"
                 ></IonInput>
               )}
+
+              <div className='data-tarefas'>
+                <h2>Escolha uma data para sua tarefa</h2>
+                <IonDatetimeButton datetime="datetime" onClick={onClickSaveDate}></IonDatetimeButton>
+
+                <IonModal keepContentsMounted={true}>
+                  <IonDatetime id="datetime" onClick={onClickSaveDate}></IonDatetime>
+                </IonModal>
+              </div>
 
              
             </footer>

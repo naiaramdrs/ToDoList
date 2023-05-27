@@ -33,11 +33,11 @@
 
 .check-list button.remove {
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 20px;
     border: none;
     outline: none;
-    background-color: #9C93B5;
+    background-color: transparent;
     border-radius: 100%;
     width: 20px;
     height: 20px;
@@ -48,11 +48,11 @@
 
 .check-list button.pincel {
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 50px;
     border: none;
     outline: none;
-    background-color: #9C93B5;
+    background-color: transparent;
     border-radius: 100%;
     width: 20px;
     height: 20px;
@@ -66,8 +66,6 @@
 }
 
 .check-list button.remove::after {
-    content: 'x';
-    color: white;
     display: block;
 }
 

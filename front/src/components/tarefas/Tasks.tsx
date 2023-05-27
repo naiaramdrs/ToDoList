@@ -23,9 +23,11 @@ const Tasks = ({ item, onChange, deleteTask, editTask }: Props) => {
                             color = 'success'
                             />
                         </div>
+
                         <label className="task">{item.nome}</label>
+                        
                         <div>
-                            <button className="remove" onClick={() => deleteTask(item.id)}></button>
+                            <button className="remove" onClick={() => deleteTask(item.id)}>🗑️</button>
                             <button className='pincel' onClick={() => editTask(item)}>✏️</button>
                         </div>
                         
