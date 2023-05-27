@@ -19,7 +19,7 @@ export default class Tarefa extends BaseModel {
   @column()
   public nome: string
 
-  @column.date({autoCreate: true})
+  @column.date()
   public data: DateTime
 
   @column()
