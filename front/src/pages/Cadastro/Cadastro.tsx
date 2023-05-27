@@ -40,7 +40,6 @@ const Cadastro: React.FC = () => {
     if (senha.value !== senhaConf.value) {
       invalid = true;
       setSenha({ ...senha, invalidity: 'Senhas não estão iguais' })
-      setSenhaConf({ ...senhaConf, invalidity: 'Senhas não estão iguais' })
     }
 
     function invalidIfEmpty(value: any, setValue: (a: any) => void) {

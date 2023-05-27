@@ -1,7 +1,7 @@
 import Config from '../config';
 
 export interface APIResponseError {
-    errors?: object[]
+    errors?: any[]
     code?: string
 };
 

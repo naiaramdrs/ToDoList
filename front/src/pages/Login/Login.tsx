@@ -25,7 +25,7 @@ const Login: React.FC = () => {
     setEmail({ ...email, invalidity: invalidityEmail });
     setPassword({ ...password, invalidity: invalidityPassword });
 
-    return !invalidityEmail && !invalidityPassword ? true : false;
+    return !invalidityEmail && !invalidityPassword;
   };
 
   const submit = () => {
@@ -34,7 +34,16 @@ const Login: React.FC = () => {
       history.push('/tarefas');
     }).catch(err => {
       if (err instanceof APIError) {
-        console.log("teve erro:", err.response);
+        if (err.response.errors) {
+          for (let msg of err.response.errors) {
+            if (msg.message.startsWith('E_INVALID_AUTH_UID')) {
+              setEmail({ ...email, invalidity: 'Usuário não cadastrado' })
+            }
+            if (msg.message.startsWith('E_INVALID_AUTH_PASSWORD')) {
+              setPassword({ ...password, invalidity: 'Senha incorreta' })
+            }
+          }
+        }
       }
     })
    }
