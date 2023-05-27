@@ -139,6 +139,7 @@ Os dados devem ser enviados no formato `application/json`.
 | chave | tipo | extra |
 |-|-|-|
 |nome|string|
+|data|string| No formato `YYYY-MM-DD`
 
 ### Response
 [Objeto de tarefa](#objeto-de-tarefa)
@@ -184,6 +185,7 @@ Os dados devem ser enviados no formato `application/json`.
 |-|-|-|
 |nome|string?| Opcional.
 |concluida|boolean?| Opcional.
+|data|string?| Opcional. No formato `YYYY-MM-DD`
 
 *Sim ta faltando a data, shhh*
 
