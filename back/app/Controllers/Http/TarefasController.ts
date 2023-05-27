@@ -1,3 +1,4 @@
+import { Exception } from '@adonisjs/core/build/standalone';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Tarefa from 'App/Models/Tarefa'
 import { DateTime } from 'luxon';
@@ -46,7 +47,7 @@ export default class TarefasController {
     const tarefa = await Tarefa.findOrFail(tarefaId)
 
     if (tarefa.idCriador !== auth.user!.id) {
-      throw new Error("Usuário não autorizado.")
+      throw new Exception('Usuário não autorizado.', 400, 'E_USUARIO_NAO_AUTORIZADO')
     }
 
     await tarefa.merge({
@@ -65,7 +66,7 @@ export default class TarefasController {
     const tarefa = await Tarefa.findOrFail(tarefaId)
 
     if (tarefa.idCriador !== auth.user!.id) {
-      throw new Error("Usuário não autorizado.")
+      throw new Exception('Usuário não autorizado.', 400, 'E_USUARIO_NAO_AUTORIZADO')
     }
 
     await tarefa.delete()
