@@ -1,15 +1,15 @@
-import {KeyboardEvent, useEffect, useState} from 'react';
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { KeyboardEvent, useEffect, useState } from 'react';
+import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonItem } from '@ionic/react';
 import { IonDatetime, IonDatetimeButton, IonModal } from '@ionic/react';
 import { Tarefa } from '../../util/Tarefa';
-import Tasks from '../tarefas/Tasks';
-import Avatar from '../../pages/Perfil/Avatar';
-import "./Menu.css"
-import "../../pages/Tarefas/Tarefas.css"
+import Tasks from '../../components/tarefas/Tasks';
+import Avatar from '../Perfil/Avatar';
+import './TarefasGeral.css'
+import './Tarefas.css'
 
 
-function Menu(props: any) {
+function TarefasGeral() {
 
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -105,7 +105,7 @@ function Menu(props: any) {
     <IonMenu contentId="main-content">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>{props.dentro}</IonTitle>
+          <IonTitle>Minhas Tarefas</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
@@ -131,7 +131,7 @@ function Menu(props: any) {
       <IonContent className="ion-padding">
         <div className='container-todo'>
           <div className='todoList'>
-            <header className='tituloMenu'>{props.principal}</header>
+            <header className='tituloMenu'>LISTA DE TAREFAS</header>
 
             {Object.values(taskList).map(item => (
               <Tasks
@@ -190,4 +190,4 @@ function Menu(props: any) {
   );
 }
 
-export default Menu;
+export default TarefasGeral;

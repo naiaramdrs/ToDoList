@@ -25,7 +25,7 @@ import Cadastro from './pages/Cadastro/Cadastro';
 import Inicio from './pages/Inicial/Inicio';
 import Tarefas from './pages/Tarefas/Tarefas';
 import Perfil from './pages/Perfil/Perfil';
-import TarefasGeral from './pages/Tarefas/meuDia/TarefasGeral';
+import TarefasGeral from './pages/Tarefas/TarefasGeral';
 
 setupIonicReact();
 
