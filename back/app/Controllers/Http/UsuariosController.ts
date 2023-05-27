@@ -30,6 +30,9 @@ const loginSchema = schema.create({
 const editarSchema = schema.create({
   nome: schema.string(),
   sobrenome: schema.string(),
+  dataNascimento: schema.string({}, [
+    rules.regex(/\d{4}-\d{2}-\d{2}/) // YYYY-MM-DD
+  ]),
 })
 
 export default class UsuariosController {
@@ -72,7 +75,8 @@ export default class UsuariosController {
 
     await auth.user!.merge({
       nome: valores.nome,
-      sobrenome: valores.sobrenome
+      sobrenome: valores.sobrenome,
+      dataNascimento: DateTime.fromISO(valores.dataNascimento),
     }).save();
 
     return auth.user!

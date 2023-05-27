@@ -1,5 +1,5 @@
 import { IonButtons, IonContent, IonHeader, IonInput, IonList, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { IonAvatar, IonItem, IonLabel} from '@ionic/react';
+import { IonItem } from '@ionic/react';
 import { Usuario } from '../../util/Usuario';
 import Botao from '../../components/botao/Botao';
 import "./Perfil.css"
@@ -27,16 +27,18 @@ function Perfil() {
   const [sobrenome, setSobrenome] = useState("");
   const [genero, setGenero] = useState("");
   const [dataNascimento, setDataNascimento] = useState("");
-  const [idade, setIdade] = useState(Number);
-  let mudouData = false;
+  const [idade, setIdade] = useState(0);
 
+  let pegouDados = false;
   useEffect(() => {
+    if (pegouDados) return;
+    pegouDados = true;
     Usuario.getLocal()?.atualizar().then(usuario => {
       setNome(usuario.nome);
       setSobrenome(usuario.sobrenome);
       setGenero(usuario.genero);
       setDataNascimento(usuario.dataNascimento);
-      setIdade(usuario.idade);
+      setIdade(usuario.calculaIdade());
     });
   }, []);
 
@@ -46,14 +48,6 @@ function Perfil() {
     Usuario.getLocal()?.editar({
       nome, sobrenome, genero, dataNascimento
     });
-
-    mudouData = true
-    if (mudouData) {
-      const data = dataNascimento ? new Date(dataNascimento) : new Date();
-      const hoje = new Date();
-      const idade = hoje.getFullYear() - data.getFullYear();
-      setIdade(idade);
-    }
   };
 
 
@@ -62,6 +56,10 @@ function Perfil() {
     // voltar para pagina de login mesmo se o logout deu errado
     history.push('/login');
   };
+
+  useEffect(() => {
+    setIdade(new Date().getFullYear() - new Date(dataNascimento).getFullYear())
+  }, [dataNascimento])
 
   return (
    <>
@@ -121,7 +119,7 @@ function Perfil() {
                 <IonInput label="Data de Nascimento:" type="date" value={dataNascimento} onIonChange={e => setDataNascimento(e.target.value as string)}></IonInput>
             </IonItem>
             <IonItem>
-                <IonInput label="Idade:" type="text" value={idade}></IonInput>
+                <IonInput label="Idade:" type="text" value={idade} disabled></IonInput>
             </IonItem>
         </IonList>
 

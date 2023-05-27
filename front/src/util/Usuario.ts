@@ -29,7 +29,6 @@ export class Usuario {
     public fotoPerfil: string | null
     public genero: string
     public dataNascimento: string
-    public idade: number
     // tem mais coisa mas por enquanto o front não precisa
 
     constructor(id: number, dados: { nome: string, sobrenome: string, email: string, fotoPerfil: string, genero: string, dataNascimento: string }) {
@@ -40,11 +39,10 @@ export class Usuario {
         this.fotoPerfil = dados.fotoPerfil;
         this.genero = dados.genero;
         this.dataNascimento = dados.dataNascimento;
-        this.idade = new Date().getFullYear() - new Date(this.dataNascimento).getFullYear();
     }
 
     static fromApiObject(obj: any): Usuario {
-        return new Usuario(obj.id, { ...obj, fotoPerfil: obj.foto_perfil ? Config.API_URL + obj.foto_perfil.url.replace(/^\/api/, '') : null });
+        return new Usuario(obj.id, { ...obj, dataNascimento: obj.data_nascimento, fotoPerfil: obj.foto_perfil ? Config.API_URL + obj.foto_perfil.url.replace(/^\/api/, '') : null });
     }
 
     static async cadastrar(dados: DadosCadastrar): Promise<Usuario> {
@@ -101,5 +99,9 @@ export class Usuario {
         this.fotoPerfil = Config.API_URL + dados.url.replace(/^\/api/, '')
 
         this.salvarLocal()
+    }
+
+    calculaIdade(): number {
+        return new Date().getFullYear() - new Date(this.dataNascimento).getFullYear()
     }
 }
