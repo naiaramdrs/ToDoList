@@ -26,10 +26,8 @@
     margin-bottom: 50px;
 }
 
-.caixa-inicio .box-conteudo .box-texto button {
-    padding: 20px;
-    border-radius: 4px 11px 4px 11px;
-    background: #C6AFC6;
+.caixa-inicio .box-conteudo .box-texto a{
+    color: #ffff;
     font-weight: bold;
 }
 
@@ -51,4 +49,35 @@
     font-weight: bold;
     color: #9C93B5;
     margin-top: 50px;
+}
+
+@media (max-width: 600px){
+    .caixa-inicio {
+        flex-direction: column-reverse;
+    }
+
+    .caixa-inicio .box-inicio {
+        width: 90%;
+    }
+
+    .caixa-inicio .box-conteudo {
+        width: 100%;
+    }
+
+    .caixa-inicio .box-conteudo .box-texto {
+        width: 100%;
+    }
+
+    .caixa-inicio .box-conteudo .box-texto h2 {
+        font-size: 19px;
+        margin-bottom: 15px;
+    }
+
+    .caixa-cards {
+        margin-top: 50px;
+    }
+
+    .caixa-cards h1 {
+        font-size: 20px;
+    }
 }

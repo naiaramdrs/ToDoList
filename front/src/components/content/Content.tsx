@@ -1,3 +1,4 @@
+import Botao from '../botao/Botao';
 import './Content.css'
 
 const Content = (props:any) => {
@@ -8,7 +9,7 @@ const Content = (props:any) => {
                     <div className='box-conteudo'>
                         <div className='box-texto'>
                             <h2>{props.h2}</h2>
-                            <a href='/cadastro'><button>Inscreva-se</button></a>
+                            <Botao color= "success" className="button-response"><a href='/cadastro'>Inscreva-se</a></Botao>
                         </div>
                     </div>
                     <div className='box-inicio'>

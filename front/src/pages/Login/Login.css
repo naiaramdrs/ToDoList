@@ -61,14 +61,10 @@
 }
 
 @media (max-width: 600px) {
-  .container {
-    flex-direction: column-reverse;
-  }
   .container .box {
-    visibility: hidden;
+    display: none;
   }
   .container .content {
     width: 100%;
   }
 }
-

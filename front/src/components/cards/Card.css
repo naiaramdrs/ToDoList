@@ -24,3 +24,10 @@
     color: #aaa1c2;
     letter-spacing: 1px;
 }
+
+@media (max-width: 700px) {
+    .card-one {
+    width: 80%;
+    padding: 20px;
+    }
+}

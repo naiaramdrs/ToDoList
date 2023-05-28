@@ -22,3 +22,19 @@
     font-size: 20px;
     color: #9C93B5;
 }
+
+@media (max-width: 600px) {
+
+    .container-titulo .box-titulo {
+        width: 90%;
+    }
+
+    .container-titulo .box-titulo h1 {
+        font-size: 40px;
+    }
+
+    .container-titulo .box-titulo p {
+        font-size: 20px;
+    }
+
+}

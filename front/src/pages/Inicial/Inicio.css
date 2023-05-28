@@ -13,3 +13,11 @@
     margin: 70px 0 70px 0;
     
 }
+
+@media (max-width: 700px) {
+    .container-cards {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    }
+}
