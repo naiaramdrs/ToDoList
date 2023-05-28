@@ -30,8 +30,7 @@ Os dados devem ser enviados no formato `application/json`
 |nome|string|
 |sobrenome|string|
 |email|string|
-|senha|string| Tem tamanho 6 no minimo. |
-|senha_confirmation|string| acho que vou tirar esse
+|senha|string| Tem tamanho 6 no minimo, e 25 no máximo |
 |genero|string|
 |dataNascimento|string| No formato `YYYY-MM-DD`, onde Y é ano, M é mês e D é dia. |
 
