@@ -174,7 +174,7 @@ function TarefasGeral() {
                 <IonModal keepContentsMounted={true}>
                   <IonDatetime
                   id="datetime" onIonChange={handleDateChange} value={selectedDate.toISOString()}
-                  ></IonDatetime>
+                 ></IonDatetime>
                 </IonModal>
               </div>
 
