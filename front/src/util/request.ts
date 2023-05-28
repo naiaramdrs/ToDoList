@@ -4,6 +4,7 @@ import Config from '../config';
 export interface APIResponseError {
     errors?: any[]
     code?: string
+    message?: string
 };
 
 export class APIError {

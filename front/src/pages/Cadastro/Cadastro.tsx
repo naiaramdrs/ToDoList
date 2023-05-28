@@ -73,7 +73,7 @@ const Cadastro: React.FC = () => {
       history.push('/tarefas');
     }).catch(err => {
       if (err instanceof APIError) {
-        if (err.response.code === 'E_EMAIL_EXISTE') {
+        if (err.response.message?.startsWith('E_EMAIL_EXISTE')) {
           setEmail({ ...email, invalidity: 'Email já cadastrado' });
         }
       }
