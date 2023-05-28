@@ -1,5 +1,8 @@
 import { IonCheckbox } from '@ionic/react';
 import { Tarefa } from '../../util/Tarefa';
+import { IonIcon } from '@ionic/react';
+import { pencil } from 'ionicons/icons';
+import { trash } from 'ionicons/icons';
 import "./Tasks.css"
 
 type Props = {
@@ -27,8 +30,8 @@ const Tasks = ({ item, onChange, deleteTask, editTask }: Props) => {
                         <label className="task">{item.nome}</label>
                         
                         <div>
-                            <button className="remove" onClick={() => deleteTask(item.id)}>🗑️</button>
-                            <button className='pincel' onClick={() => editTask(item)}>✏️</button>
+                            <button className="remove" onClick={() => deleteTask(item.id)}><IonIcon icon={trash}></IonIcon></button>
+                            <button className='pincel' onClick={() => editTask(item)}><IonIcon icon={pencil}></IonIcon></button>
                         </div>
                         
                         <span className='data-task'>{item.dataFormatada()}</span>

@@ -71,7 +71,11 @@
 
 .data-task {
     margin-left: 10%;
-    font-size: 1em;
+    font-size: 13px;
+    padding: 5px;
+    border: 1px solid #f1edfd;
+    border-radius: 6px;
+    font-family: emoji;
 }
 
 #marcado {

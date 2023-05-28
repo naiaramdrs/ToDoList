@@ -1,5 +1,5 @@
 import { KeyboardEvent, useEffect, useMemo, useState } from 'react';
-import { IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonItem } from '@ionic/react';
 import { IonDatetime, IonDatetimeButton, IonModal } from '@ionic/react';
 import { Tarefa } from '../../util/Tarefa';
@@ -152,7 +152,7 @@ function TarefasGeral() {
             <br/>
             <footer>
 
-              <div style={{display: 'flex'}}>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <IonInput
                   labelPlacement="floating" 
                   fill="outline" 
@@ -163,7 +163,8 @@ function TarefasGeral() {
                   color="success"
                   slot="end"
                 ></IonInput>
-                <button onClick={handleEnviarButton}>Enviar</button>
+                <br/>
+               <IonButton onClick={handleEnviarButton} color="success">{isEditing ? 'Salvar' : 'Enviar'}</IonButton>
               </div>
 
               <div className='data-tarefas'>
